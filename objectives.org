@@ -1,0 +1,44 @@
+* Day 1: Understanding Git's Worldview
+** SWBAT discuss Git's strengths and weaknesses
+** SWBAT configure global options with `git config`
+** SWBAT clone an existing git repo
+** SWBAT explain how Git stores the contents of a project history locally
+** SWBAT explain how hashes enforce integrity of data
+** SWBAT clone a Git repository from Github with `git clone`
+** SWBAT use `git status` to see the status of a git repository
+** SWBAT use `git log` and `git diff` to study the project history in different ways
+** SWBAT use `git checkout` and `git show` to see earlier versions of the work
+* Day 2: Ignoring Files and Fixing Mistakes
+** SWBAT initialize a git repository from existing work with `git init`
+** SWBAT keep files out of version control with `.gitignore`
+** SWBAT identify the modified/working, staged, and committed states of a file
+** SWBAT use `git diff --cached` to examine the staging area
+** SWBAT use `git add` and `git reset` to manipulate the staging area
+** SWBAT commit changes to a codebase with `git commit`
+** SWBAT explain style guidelines for a commit message
+** SWBAT fix a commit message with `git commit --amend`
+** SWBAT use `git rm`, `git mv`, and `git checkout` to change previously committed files
+** SWBAT go back to the most recent commit with `git reset --hard`
+* Day 3: Branching and Merging
+** SWBAT explain why Git branches are so efficient
+** SWBAT use `HEAD` and tilde or caret notation to point to recent history
+** SWBAT create a local branch and commit to it with `git branch` and `git checkout -b`
+** SWBAT monitor branches with `git branch`
+** SWBAT switch between branches with `git checkout`
+** SWBAT use `git merge` to cleanly merge one branch into another
+** SWBAT distinguish a fast-forward from a non-fast-forward merge that has a merge commit
+** SWBAT delete a merged or unmerged local branch
+** SWBAT resolve a merge conflict
+* Day 4: Collaborating on Github
+** SWBAT create, assign, comment on, and close GitHub issues
+** SWBAT use `git remote` to manage remote repositories
+** SWBAT push/pull branches to/from github with `git push` and `git pull`
+** SWBAT use `git revert` to reverse a commit that's already public
+** SWBAT create and assign a pull request to a repo where they have push access
+** SWBAT review a collaborator's pull request and explain the meaning of 'LGTM'
+** SWBAT explain why it can be confusing to work on master
+** SWBAT refer to remote tracking branches with `<remote>/<branch>` notation
+** SWBAT use `git fetch` to fetch someone else's branch without merging
+** SWBAT fork a collaborator's repo and create a pull request where they don't have push access
+** SWBAT update their fork of the read-only repo from the command line
+** SWBAT delete a remote branch with `git push origin :<branch>`
