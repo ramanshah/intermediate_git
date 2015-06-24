@@ -1,0 +1,50 @@
+\documentclass{beamer}
+\usetheme{Rochester}
+\usepackage{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{inconsolata}
+
+\geometry{paperwidth = 4.75in, paperheight = 4.75in}
+
+% Custom U of C color palette
+\definecolor{ucMaroon}{RGB}{128,0,0}
+\definecolor{ucDarkGray}{RGB}{118,118,118}
+\definecolor{ucLightGray}{RGB}{214,214,206}
+
+\setbeamercolor{block title}{fg=white,bg=ucMaroon}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg}
+\setbeamercolor{block title example}{use=example text,fg=white,bg=example text.fg}
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=ucLightGray}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg}
+
+\setbeamercolor{palette primary}{fg=white,bg=ucMaroon}
+\setbeamercolor{palette secondary}{fg=white,bg=ucLightGray}
+\setbeamercolor{palette tertiary}{fg=white,bg=ucDarkGray}
+\setbeamercolor{palette quaternary}{fg=white,bg=black}
+
+\setbeamercolor{sidebar}{bg=ucMaroon}
+
+\setbeamercolor{palette sidebar primary}{fg=ucMaroon}
+\setbeamercolor{palette sidebar secondary}{fg=white}
+\setbeamercolor{palette sidebar tertiary}{fg=ucMaroon}
+\setbeamercolor{palette sidebar quaternary}{fg=white}
+
+\setbeamercolor{titlelike}{parent=palette primary}
+\setbeamercolor{itemize item}{fg=ucMaroon}
+
+% Code block formatting. Fragile frames needed for these to work.
+\newtcblisting{gitCommand}{
+  colframe=black,
+  colback=ucLightGray,
+  boxrule=1pt,
+  arc=2pt,
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt,
+  before=\vspace{6pt},
+  boxsep=0pt,
+  listing only,
+  hbox
+}
