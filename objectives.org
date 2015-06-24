@@ -4,8 +4,8 @@
 ** SWBAT clone an existing git repo
 ** SWBAT explain how Git stores the contents of a project history locally
 ** SWBAT explain how hashes enforce integrity of data
-** SWBAT clone a Git repository from Github with `git clone`
 ** SWBAT use `git status` to see the status of a git repository
+** SWBAT use `HEAD` and tilde notation to point to recent history
 ** SWBAT use `git log` and `git diff` to study the project history in different ways
 ** SWBAT use `git checkout` and `git show` to see earlier versions of the work
 * Day 2: Ignoring Files and Fixing Mistakes
@@ -21,16 +21,14 @@
 ** SWBAT go back to the most recent commit with `git reset --hard`
 * Day 3: Branching and Merging
 ** SWBAT explain why Git branches are so efficient
-** SWBAT use `HEAD` and tilde or caret notation to point to recent history
 ** SWBAT create a local branch and commit to it with `git branch` and `git checkout -b`
-** SWBAT monitor branches with `git branch`
+** SWBAT monitor branches with `git branch` and `git log --graph`
 ** SWBAT switch between branches with `git checkout`
 ** SWBAT use `git merge` to cleanly merge one branch into another
 ** SWBAT distinguish a fast-forward from a non-fast-forward merge that has a merge commit
 ** SWBAT delete a merged or unmerged local branch
 ** SWBAT resolve a merge conflict
 * Day 4: Collaborating on Github
-** SWBAT create, assign, comment on, and close GitHub issues
 ** SWBAT use `git remote` to manage remote repositories
 ** SWBAT push/pull branches to/from github with `git push` and `git pull`
 ** SWBAT use `git revert` to reverse a commit that's already public
