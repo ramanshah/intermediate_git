@@ -1,0 +1,177 @@
+\input{../preamble}
+
+\title{Intermediate Git}
+\subtitle{Day 1: Understanding Git's Worldview}
+\author{Raman A.~Shah}
+\date{}
+
+\begin{document}
+
+%% Title
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+%% Have students do initial config if they haven't already.
+\begin{frame}[fragile]{Some initial configuration}
+  \begin{gitCommand}git config --list\end{gitCommand}
+
+  If your user name and email are not set:
+
+  \begin{gitCommand}
+git config --global user.name "Raman A. Shah"
+git config --global user.email "raman@uchicago.edu"
+  \end{gitCommand}
+
+  If you don't like \texttt{vim} firing up in the middle of doing Git stuff:
+
+  \begin{gitCommand}git config --global core.editor "nano"\end{gitCommand}
+
+\end{frame}
+
+%% Git is...
+%% ...a distributed version control system.
+\begin{frame}{Git is\ldots}
+  \Huge {
+    \begin{tabbing}
+      \ldots a \= distributed \\
+      \> version control \\
+      \> \color{ucMaroon}{system}\color{black}{.}
+    \end{tabbing}
+  }
+\end{frame}
+
+\begin{frame}{Git is\ldots}
+  \Huge {
+    \begin{tabbing}
+      \ldots a \= distributed \\
+      \> \color{ucMaroon}{version control} \\
+      \> system.
+    \end{tabbing}
+  }
+\end{frame}
+
+\begin{frame}{Git is\ldots}
+  \Huge {
+    \begin{tabbing}
+      \ldots a \= \color{ucMaroon}{distributed} \\
+      \> version control \\
+      \> system.
+    \end{tabbing}
+  }
+\end{frame}
+
+% ADD FIGURES
+
+%% Git is...
+%% ...a great way to collaborate on projects consisting of many code or text files.
+\begin{frame}{Git is\ldots}
+  \hangindent=30pt \Huge {
+  \ldots a great way to collaborate on projects consisting of
+    many code or text files.
+  }
+\end{frame}
+
+%% Git is...
+%% ...meant for perfecting (software) products.
+\begin{frame}{Git is\ldots}
+  \hangindent=30pt \Huge {
+  \ldots meant for perfecting (software) \emph{products}.
+  }
+\end{frame}
+
+%% Git is...
+%% ...something that enhances a directory in your filesystem.
+\begin{frame}{Git is\ldots}
+  \hangindent=30pt \Huge {
+  \ldots something that enhances a directory in your filesystem.
+  }
+\end{frame}
+
+%% ACTIVITY - show clone command and tools to poke around in the git
+%% internals.
+
+%% Git is...
+%% ...safe because it tracks every single bit in your files and
+%% commits with hash functions.
+\begin{frame}{Git is\ldots}
+  \hangindent=30pt \Huge {
+  \ldots safe because it tracks every single bit in your files and commits with
+  hash functions.
+  }
+\end{frame}
+
+%% Git is...
+%% ...fast because it stores a (compressed) copy of every version of
+%% every file locally.
+\begin{frame}{Git is\ldots}
+  \hangindent=30pt \Huge {
+  \ldots fast because it stores a (compressed) copy of every version
+  of every file locally.
+  }
+\end{frame}
+
+%% Git is...
+%% ...hard because efficiently managing version control and collaboration is hard.
+\begin{frame}{Git is\ldots}
+  \hangindent=30pt \Huge {
+  \ldots hard because efficiently managing version control and collaboration is
+  hard.
+  }
+\end{frame}
+
+%% Playing with the past
+\begin{frame}[fragile]{Playing with the Past}
+  \begin{gitCommand}git log\end{gitCommand}
+  \begin{gitCommand}git diff\end{gitCommand}
+  \begin{gitCommand}git show\end{gitCommand}
+  \begin{gitCommand}git checkout\end{gitCommand}
+\end{frame}
+
+\begin{frame}[fragile]{Reviewing history: git log}
+\end{frame}
+
+\begin{frame}[fragile]{Tracking down changes: git diff}
+\end{frame}
+
+\begin{frame}[fragile]{Seeing old versions: git show}
+\end{frame}
+
+\begin{frame}[fragile]{Going back in time: git checkout}
+\end{frame}
+
+%% Git is not...
+%% ...a great system for archiving the data created in (experimental) projects.
+\begin{frame}{Git is not\ldots}
+  \hangindent=30pt \Huge {
+  \ldots a great system for archiving the data created in (experimental) projects.
+  }
+\end{frame}
+
+%% Git is not...
+%% ...ideal for storing bulky data.
+\begin{frame}{Git is not\ldots}
+  \hangindent=30pt \Huge {
+  \ldots ideal for storing bulky data.
+  }
+\end{frame}
+
+%% Git is not...
+%% ...quite as helpful for binary files as for text files.
+\begin{frame}{Git is not\ldots}
+  \hangindent=30pt \Huge {
+  \ldots quite as helpful for binary files as for text files.
+  }
+\end{frame}
+
+%% Git is not...
+%% ...a golden bullet for collaborating on written works.
+\begin{frame}{Git is not\ldots}
+  \hangindent=30pt \Huge {
+  \ldots a golden bullet for collaborating on written works.
+  }
+\end{frame}
+
+%% Ph.D. comic
+
+\end{document}

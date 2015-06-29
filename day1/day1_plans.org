@@ -1,0 +1,101 @@
+* Have students do initial config if they haven't already.
+
+* Git is...
+
+** ...a distributed version control system.
+
+systems vs. tools
+
+version control - what does it do for you? Rewind, at the very least.
+
+The big thing: distributed.
+
+    local (rcs)
+vs. centralized (CVS, Subversion (SVN), Perforce)
+vs. distributed (Git, Mercurial)
+
+Implicit highly redundant backups of important repositories. There's no computer you can spill coffee on, no city you can blow up, that will result in loss of the source code.
+
+** ...a great way to collaborate on projects consisting of many code or text files.
+
+Invented in 2005 by Linus Torvalds to manage developing the Linux kernel after a legal problem with the previous version control system's vendor.
+Linux has 15 million lines of code and >1300 recent contributors working all at once!
+Git is an industrial strength tool for managing code. Killer app: efficient branching and merging. That will be the subject of day 3.
+
+** ...meant for perfecting (software) products.
+
+Leveraging Git often means you strip off a part of your research work that can be perfected (like an analysis code or a manuscript) and keep it separate from the chronological artifacts of the scientific ideas you've tried.
+
+** ...something that enhances a directory in your filesystem.
+
+Have students clone a simple repo. (Maybe ramanshah/standup_snitch - it's very small and very clean.) Offer the following tools:
+
+ls -R
+ls -al
+cat
+
+Point out .gitignore. Have them poke around in .git. Hand out
+questions that they'll answer in ~3 minutes of independent activity:
+
+Depends on whether you take the red pill or the blue pill. One way to look at it: You have a normal directory with a .git subdirectory, so it's a Git repo. The other way to look at it: there's a .git subdirectory that knows and runs everything in the directory except the files you're ignoring. The .git subdirectory will pull out files into the rest of your directory, the "working tree", when you issue the right Git commands, replacing what's currently there. Many students have expressed to me that Git is "dangerous" - but it's only dangerous from the first point of view and can only destroy uncommitted stuff, unless you ask it to.
+
+** ...safe because it tracks every single bit in your files and commits with hash functions.
+
+Teach hash functions.
+echo 'Hello world' | sha1sum
+echo 'Hello world ' | sha1sum
+
+If you flip one bit in one file under Git version control, it will know.
+
+Show the object model.
+
+** ...fast because it stores a (compressed) copy of every version of every file locally.
+
+Illustration of the object model.
+
+** ...hard because efficiently managing version control and collaboration is hard.
+
+(Also, because it was written by a small, sophisticated group of kernel hackers who didn't worry much about ease of use. Git became dominant because it was fast and safe and later because of Github/network effects. It started out very user-hostile, and gradually some convenience functions got bolted on. Newer software like Mercurial is arguably more user-friendly, but it doesn't have the market share.)
+
+It's popular in the macho software business to say that things are easy and brag to people about how quickly you learn and work (because you're so smart). I often feel intimidated by these kinds of statements. Screw that. Git is hard. Give it the respect of something that is hard and that requires time and diligence to get good at. You'll improve more quickly than you think.
+
+There's a lot of essential complexity to versioning a project without copying everything and being able to merge changes made in parallel by collaborators.
+
+Show all the verbs: git help --all
+
+In four meetings we'll cover about 70-80 pages of a 250 page Git book that's on my desk. You are smart and capable of independence - be patient, don't freak out, do it correctly, keep learning. git help is your friend. Google is your friend. StackOverflow is your friend.
+
+* Playing with the past
+
+git log - show a bunch of flags, have them play
+
+git diff HEAD~ or git diff HEAD~1
+git diff HEAD~2 HEAD~1
+git diff 0d0ffab 78485d4 .gitignore
+
+git show HEAD~2:
+
+git checkout HEAD~2 - this rewrote all the files in your directory to rewind its state to HEAD~2!!
+git checkout master
+
+* Git is not...
+
+** ...a great system for archiving the data created in (experimental) projects.
+
+Its worldview is one where things get modified. If you're just adding a subdirectory for each day you run a calculation with the input and results, you're missing the point of Git.
+
+Not that we don't do it! But Git is best at managing the semantic structure of a deliverable (such as a program or a publishable document) whose final perfect form is what matters, vs. the chronological structure of a sequence of stuff you tried as a scientist, where the history is what matters. This is something we can discuss at length; Git isn't a magic organizational bullet. But when a large piece of your research is getting a code just right, it is overwhelmingly useful to strip off that piece and manage it under Git.
+
+** ...ideal for storing bulky data.
+
+Because it stores every version of every file, and everybody (not the big data cluster where you're working) has to download a copy with their clone. Git LFS is a very new extension that gets around some of these issues.
+
+** ...quite as helpful for binary files as for text files.
+
+Because you don't get diff or merge capabilities. Versioning a Word document or pdf is something Git will do, but it misses the point. Better to version the LaTeX code, and possibly throw in the pdf as a convenience.
+
+** ...a golden bullet for collaborating on written works.
+
+(The changes tend to be promiscuous; versioning figures or typeset documents starts to get bloated. But I still do it, especially with LaTeX or other pain-text typesetting technology - both my last first-author paper and my dissertation were git repositories. I don't know of a golden bullet for working on drafts with your adviser. Git's better than nothing.)
+
+Ph.D. comic "FINAL".
