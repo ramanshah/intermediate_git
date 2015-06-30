@@ -10,6 +10,12 @@
 %% Title
 \begin{frame}[plain]
   \titlepage
+  \footnotesize{Copyright (c) 2015 by Raman A.~Shah.\\
+  Released under
+     \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}
+          {Creative Commons BY-NC-SA 3.0 Unported}.\\
+    \href{https://github.com/ramanshah/intermediate\_git}{https://github.com/ramanshah/intermediate\_git}}
+
 \end{frame}
 
 %% Have students do initial config if they haven't already.
@@ -61,7 +67,44 @@ git config --global user.email "raman@uchicago.edu"
   }
 \end{frame}
 
-% ADD FIGURES
+\begin{frame}{Git is\ldots}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0101-tn.png}
+    \\ Local version control (\emph{e.g.}, \texttt{rcs}).
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~1-1.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+
+\end{frame}
+
+\begin{frame}{Git is\ldots}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0102-tn.png}
+    \\ Centralized version control (\emph{e.g.}, CVS, Subversion (SVN), Perforce).
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~1-2.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+
+\end{frame}
+
+\begin{frame}{Git is\ldots}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0103-tn.png}
+    \\ Distributed version control (\emph{e.g.}, \texttt{rcs}).
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~1-3.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+
+\end{frame}
 
 %% Git is...
 %% ...a great way to collaborate on projects consisting of many code or text files.
@@ -81,15 +124,31 @@ git config --global user.email "raman@uchicago.edu"
 \end{frame}
 
 %% Git is...
-%% ...something that enhances a directory in your filesystem.
+%% ...a content-addressable filesystem.
 \begin{frame}{Git is\ldots}
   \hangindent=30pt \Huge {
-  \ldots something that enhances a directory in your filesystem.
+  \ldots a content-addressable filesystem.
   }
 \end{frame}
 
-%% ACTIVITY - show clone command and tools to poke around in the git
-%% internals.
+%% Exploring a Git repository's internals
+\begin{frame}[fragile]{Exploring a Git repository's internals}
+  From a place where you wouldn't mind a new subdirectory:
+
+  \begin{gitCommand}git clone [URL]\end{gitCommand}
+
+  \begin{gitCommand}cd [repo name]\end{gitCommand}
+
+  Explore the contents of \texttt{.git} and \texttt{.gitignore}. To
+  list a directory's contents including hidden ``dotfiles'':
+
+  \begin{gitCommand}ls -al\end{gitCommand}
+
+  To write out the contents of a file to the terminal:
+
+  \begin{gitCommand}cat [filename]\end{gitCommand}
+
+\end{frame}
 
 %% Git is...
 %% ...safe because it tracks every single bit in your files and

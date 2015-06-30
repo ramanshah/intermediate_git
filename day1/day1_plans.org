@@ -26,7 +26,7 @@ Git is an industrial strength tool for managing code. Killer app: efficient bran
 
 Leveraging Git often means you strip off a part of your research work that can be perfected (like an analysis code or a manuscript) and keep it separate from the chronological artifacts of the scientific ideas you've tried.
 
-** ...something that enhances a directory in your filesystem.
+** ...a content-addressable filesystem.
 
 Have students clone a simple repo. (Maybe ramanshah/standup_snitch - it's very small and very clean.) Offer the following tools:
 
@@ -36,6 +36,12 @@ cat
 
 Point out .gitignore. Have them poke around in .git. Hand out
 questions that they'll answer in ~3 minutes of independent activity:
+
+(1) What do the contents of .gitignore look like?
+
+(2) The file .git/HEAD refers to another file in .git. Which file? What is in that file? How many digits does it have?
+
+(3)
 
 Depends on whether you take the red pill or the blue pill. One way to look at it: You have a normal directory with a .git subdirectory, so it's a Git repo. The other way to look at it: there's a .git subdirectory that knows and runs everything in the directory except the files you're ignoring. The .git subdirectory will pull out files into the rest of your directory, the "working tree", when you issue the right Git commands, replacing what's currently there. Many students have expressed to me that Git is "dangerous" - but it's only dangerous from the first point of view and can only destroy uncommitted stuff, unless you ask it to.
 
@@ -51,7 +57,7 @@ Show the object model.
 
 ** ...fast because it stores a (compressed) copy of every version of every file locally.
 
-Illustration of the object model.
+Storing diffs vs. storing objects.
 
 ** ...hard because efficiently managing version control and collaboration is hard.
 
