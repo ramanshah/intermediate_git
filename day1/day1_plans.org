@@ -117,7 +117,7 @@ We'll understand this more deeply on day 3: the thing to know now is that Git is
 
 * Git is not...
 
-** ...a great system for archiving the data created in (experimental) projects.
+** ...documenting (experimental) projects.
 
 Its worldview is one where things get modified. If you're just adding a subdirectory for each day you run a calculation with the input and results, you're missing the point of Git.
 

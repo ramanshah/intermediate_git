@@ -11,10 +11,10 @@
 \begin{frame}[plain]
   \titlepage
   \footnotesize{Copyright (c) 2015 by Raman A.~Shah.\\
-  Released under
-     \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}
-          {Creative Commons BY-NC-SA 3.0 Unported}.\\
-    \href{https://github.com/ramanshah/intermediate\_git}{https://github.com/ramanshah/intermediate\_git}}
+  \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}
+       {Creative Commons BY-NC-SA 3.0 Unported}.\\
+   \href{https://github.com/ramanshah/intermediate\_git}
+        {https://github.com/ramanshah/intermediate\_git}}
 
 \end{frame}
 
@@ -25,8 +25,10 @@
   If your user name and email are not set:
 
   \begin{gitCommand}
-git config --global user.name "Raman A. Shah"
-git config --global user.email "raman@uchicago.edu"
+git config --global user.name \
+  "Raman A. Shah"
+git config --global user.email \
+  "raman@uchicago.edu"
   \end{gitCommand}
 
   If you don't like \texttt{vim} firing up in the middle of doing Git stuff:
@@ -38,7 +40,7 @@ git config --global user.email "raman@uchicago.edu"
 %% Git is...
 %% ...a distributed version control system.
 \begin{frame}{Git is\ldots}
-  \Huge {
+  \huge {
     \begin{tabbing}
       \ldots a \= distributed \\
       \> version control \\
@@ -48,7 +50,7 @@ git config --global user.email "raman@uchicago.edu"
 \end{frame}
 
 \begin{frame}{Git is\ldots}
-  \Huge {
+  \huge {
     \begin{tabbing}
       \ldots a \= distributed \\
       \> \color{ucMaroon}{version control} \\
@@ -58,7 +60,7 @@ git config --global user.email "raman@uchicago.edu"
 \end{frame}
 
 \begin{frame}{Git is\ldots}
-  \Huge {
+  \huge {
     \begin{tabbing}
       \ldots a \= \color{ucMaroon}{distributed} \\
       \> version control \\
@@ -109,7 +111,7 @@ git config --global user.email "raman@uchicago.edu"
 %% Git is...
 %% ...a great way to collaborate on projects consisting of many code or text files.
 \begin{frame}{Git is\ldots}
-  \hangindent=30pt \Huge {
+  \hangindent=26pt \huge {
   \ldots a great way to collaborate on projects consisting of
     many code or text files.
   }
@@ -118,7 +120,7 @@ git config --global user.email "raman@uchicago.edu"
 %% Git is...
 %% ...meant for perfecting (software) products.
 \begin{frame}{Git is\ldots}
-  \hangindent=30pt \Huge {
+  \hangindent=26pt \huge {
   \ldots meant for perfecting (software) \emph{products}.
   }
 \end{frame}
@@ -126,13 +128,13 @@ git config --global user.email "raman@uchicago.edu"
 %% Git is...
 %% ...a content-addressable filesystem.
 \begin{frame}{Git is\ldots}
-  \hangindent=30pt \Huge {
-  \ldots a content-addressable filesystem.
+  \hangindent=26pt \huge {
+  \ldots a content addressable filesystem.
   }
 \end{frame}
 
-%% Exploring a Git repository's internals
-\begin{frame}[fragile]{Exploring a Git repository's internals}
+%% Exploring repository internals
+\begin{frame}[fragile]{Exploring repository internals}
   From a place where you wouldn't mind a new subdirectory:
 
   \begin{gitCommand}git clone [URL]\end{gitCommand}
@@ -143,7 +145,7 @@ git config --global user.email "raman@uchicago.edu"
 
 \end{frame}
 
-\begin{frame}[fragile]{Exploring a Git repository's internals}
+\begin{frame}[fragile]{Exploring repository internals}
   Explore the contents of \texttt{.git} and \texttt{.gitignore}. To
   list a directory's contents including hidden ``dotfiles'':
 
@@ -159,7 +161,7 @@ git config --global user.email "raman@uchicago.edu"
 %% ...safe because it tracks every single bit in your files and
 %% commits with hash functions.
 \begin{frame}{Git is\ldots}
-  \hangindent=30pt \Huge {
+  \hangindent=26pt \huge {
   \ldots safe because it tracks every single bit in your files and commits with
   hash functions.
   }
@@ -168,7 +170,7 @@ git config --global user.email "raman@uchicago.edu"
 %% Hash functions
 \begin{frame}[fragile]{Hashes (checksums)}
   \begin{figure}
-    \includegraphics[scale=0.3]{hash_functions.png}
+    \includegraphics[scale=0.25]{hash_functions.png}
     \\ SHA-1 maps a file or text to a 160-bit value in a scrambly way.
   \end{figure}
 
@@ -177,10 +179,10 @@ git config --global user.email "raman@uchicago.edu"
   \begin{gitCommand}sha1sum standup_snitch.py\end{gitCommand}
 \end{frame}
 
-%% Versioning a project with hashes
-\begin{frame}{Versioning a project with hashes}
+%% Content addressability
+\begin{frame}{Content addressability}
   \begin{figure}
-    \includegraphics[scale=1.0]{18333fig0301-tn.png}
+    \includegraphics[scale=0.85]{18333fig0301-tn.png}
     \\ Content is snapshotted at the blob, tree, and commit levels.
   \end{figure}
   \footnotesize{Scott Chacon,
@@ -194,7 +196,7 @@ git config --global user.email "raman@uchicago.edu"
 %% ...fast because it stores a (compressed) copy of every version of
 %% every file locally.
 \begin{frame}{Git is\ldots}
-  \hangindent=30pt \Huge {
+  \hangindent=26pt \huge {
   \ldots fast because it stores a (compressed) copy of every version
   of every file locally.
   }
@@ -202,7 +204,7 @@ git config --global user.email "raman@uchicago.edu"
 
 \begin{frame}{Git is\ldots}
   \begin{figure}
-    \includegraphics[scale=1.0]{18333fig0104-tn.png}
+    \includegraphics[scale=0.8]{18333fig0104-tn.png}
     \\ Other version control systems require calculating versions of a file with diffs.
   \end{figure}
   \footnotesize{Scott Chacon,
@@ -215,7 +217,7 @@ git config --global user.email "raman@uchicago.edu"
 
 \begin{frame}{Git is\ldots}
   \begin{figure}
-    \includegraphics[scale=1.0]{18333fig0105-tn.png}
+    \includegraphics[scale=0.8]{18333fig0105-tn.png}
     \\ Git just stores all (unique) versions.
   \end{figure}
   \footnotesize{Scott Chacon,
@@ -229,7 +231,7 @@ git config --global user.email "raman@uchicago.edu"
 %% Git is...
 %% ...hard because efficiently managing version control and collaboration is hard.
 \begin{frame}{Git is\ldots}
-  \hangindent=30pt \Huge {
+  \hangindent=26pt \huge {
   \ldots hard because efficiently managing version control and collaboration is
   hard.*
   }
@@ -264,8 +266,8 @@ git config --global user.email "raman@uchicago.edu"
   \begin{gitCommand}git help log\end{gitCommand}
 \end{frame}
 
-%% Tracking down changes: git diff
-\begin{frame}[fragile]{Tracking down changes: git diff}
+%% Finding changes: git diff
+\begin{frame}[fragile]{Finding changes: git diff}
 
   \texttt{HEAD} is a ``You Are Here'' pointer. Tilde notation lets us
   walk back in history.
@@ -282,7 +284,10 @@ git config --global user.email "raman@uchicago.edu"
 
   You can specify with hashes, and single out specific files:
 
-  \begin{gitCommand}git diff [older hash] [newer hash] [path]\end{gitCommand}
+  \begin{gitCommand}
+git diff [older hash] [newer hash] \
+  [path]
+  \end{gitCommand}
 
 \end{frame}
 
@@ -309,7 +314,8 @@ git config --global user.email "raman@uchicago.edu"
   You can redirect it to a file outside of the repo to recover an old version.
 \end{frame}
 
-\begin{frame}[fragile]{Going back in time: git checkout}
+%% Time travel: git checkout
+\begin{frame}[fragile]{Time travel: git checkout}
   Rewrite the contents of the directory to reflect the repository one commit
   ago:
 
@@ -322,18 +328,17 @@ git config --global user.email "raman@uchicago.edu"
 \end{frame}
 
 %% Git is not...
-%% ...a great system for archiving the data created in (experimental) projects.
+%% ...a great system for documenting (experimental) projects.
 \begin{frame}{Git is not\ldots}
-  \hangindent=30pt \Huge {
-  \ldots a great system for archiving the data created in (experimental)
-  \emph{projects}.
+  \hangindent=26pt \huge {
+  \ldots a great system for documenting (experimental) \emph{projects}.
   }
 \end{frame}
 
 %% Git is not...
 %% ...ideal for storing bulky data.
 \begin{frame}{Git is not\ldots}
-  \hangindent=30pt \Huge {
+  \hangindent=26pt \huge {
   \ldots ideal for storing bulky data.*
   }
 \end{frame}
@@ -341,7 +346,7 @@ git config --global user.email "raman@uchicago.edu"
 %% Git is not...
 %% ...quite as helpful for binary files as for text files.
 \begin{frame}{Git is not\ldots}
-  \hangindent=30pt \Huge {
+  \hangindent=26pt \huge {
   \ldots quite as helpful for binary files as for text files.
   }
 \end{frame}
@@ -349,7 +354,7 @@ git config --global user.email "raman@uchicago.edu"
 %% Git is not...
 %% ...a silver bullet for collaborating on written works.
 \begin{frame}{Git is not\ldots}
-  \hangindent=30pt \Huge {
+  \hangindent=26pt \huge {
   \ldots a silver bullet for collaborating on written works.
   }
 \end{frame}
