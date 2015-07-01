@@ -239,6 +239,7 @@ git config --global user.email "raman@uchicago.edu"
 \begin{frame}[fragile]{Playing with the Past}
   \begin{gitCommand}git log\end{gitCommand}
   \begin{gitCommand}git diff\end{gitCommand}
+  \begin{gitCommand}git blame\end{gitCommand}
   \begin{gitCommand}git show\end{gitCommand}
   \begin{gitCommand}git checkout\end{gitCommand}
 \end{frame}
@@ -283,6 +284,19 @@ git config --global user.email "raman@uchicago.edu"
 
   \begin{gitCommand}git diff [older hash] [newer hash] [path]\end{gitCommand}
 
+\end{frame}
+
+%% Finding authors: git blame
+\begin{frame}[fragile]{Finding authors: git blame}
+
+  \begin{gitCommand}git blame [path]\end{gitCommand}
+
+  Good for:
+
+  \begin{itemize}
+    \item Blaming people for mistakes (as advertised)
+    \item Figuring out whom to ask for guidance or code review
+  \end{itemize}
 
 \end{frame}
 

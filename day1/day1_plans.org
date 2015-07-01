@@ -95,26 +95,29 @@ Show a bunch of flags.
 Show git help log and model how to find something in a man page.
 
 model:
-git log --since='Apr 2015'
+git log --until='24 Apr 2015'
 git log -1 --pretty=format:%H
 
 ** git diff
 git diff HEAD~ or git diff HEAD~1
-git diff HEAD~2 HEAD~1
+git diff HEAD~3 HEAD~1
 
 Model:
 git log -3 --stat
 git diff 0d91f07f3 fe1d70548 list_channels.py
 
+** git blame
+git blame list_channels.py
+
 ** git show
-git show fe1d70548:./list_channels.py
+git show 0d91f07f:./list_channels.py
 
 Sometimes you want to grab an old version of a code.
 
-git show fe1d70548:./list_channels.py > /tmp/list_channels_old.py
+git show 0d91f07f:./list_channels.py > /tmp/list_channels_old.py
 
 ** git checkout
-git checkout HEAD~2 - this rewrote all the files in your directory to rewind its state to HEAD~2!!
+git checkout HEAD~1 - this rewrote all the files in your directory to rewind its state to HEAD~1!!
 
 'Detached HEAD state' - git status
 

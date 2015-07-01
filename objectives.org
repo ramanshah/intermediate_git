@@ -7,6 +7,7 @@
 ** SWBAT use `git status` to see the status of a git repository
 ** SWBAT use `HEAD` and tilde notation to point to recent history
 ** SWBAT use `git log` and `git diff` to study the project history in different ways
+** SWBAT use `git blame` to find the last person who touched a line of code
 ** SWBAT use `git checkout` and `git show` to see earlier versions of the work
 * Day 2: Ignoring Files and Fixing Mistakes
 ** SWBAT initialize a git repository from existing work with `git init`
