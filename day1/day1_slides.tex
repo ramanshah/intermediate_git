@@ -139,6 +139,11 @@ git config --global user.email "raman@uchicago.edu"
 
   \begin{gitCommand}cd [repo name]\end{gitCommand}
 
+  \begin{gitCommand}git status\end{gitCommand}
+
+\end{frame}
+
+\begin{frame}[fragile]{Exploring a Git repository's internals}
   Explore the contents of \texttt{.git} and \texttt{.gitignore}. To
   list a directory's contents including hidden ``dotfiles'':
 
@@ -160,6 +165,31 @@ git config --global user.email "raman@uchicago.edu"
   }
 \end{frame}
 
+%% Hash functions
+\begin{frame}[fragile]{Hashes (checksums)}
+  \begin{figure}
+    \includegraphics[scale=0.3]{hash_functions.png}
+    \\ SHA-1 maps a file or text to a 160-bit value in a scrambly way.
+  \end{figure}
+
+  \begin{gitCommand}echo 'a' | sha1sum\end{gitCommand}
+
+  \begin{gitCommand}sha1sum standup_snitch.py\end{gitCommand}
+\end{frame}
+
+%% Versioning a project with hashes
+\begin{frame}{Versioning a project with hashes}
+  \begin{figure}
+    \includegraphics[scale=1.0]{18333fig0301-tn.png}
+    \\ Content is snapshotted at the blob, tree, and commit levels.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-1.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
 %% Git is...
 %% ...fast because it stores a (compressed) copy of every version of
 %% every file locally.
@@ -170,12 +200,38 @@ git config --global user.email "raman@uchicago.edu"
   }
 \end{frame}
 
+\begin{frame}{Git is\ldots}
+  \begin{figure}
+    \includegraphics[scale=1.0]{18333fig0104-tn.png}
+    \\ Other version control systems require calculating versions of a file with diffs.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~1-4.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+
+\end{frame}
+
+\begin{frame}{Git is\ldots}
+  \begin{figure}
+    \includegraphics[scale=1.0]{18333fig0105-tn.png}
+    \\ Git just stores all (unique) versions.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~1-5.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+
+\end{frame}
+
 %% Git is...
 %% ...hard because efficiently managing version control and collaboration is hard.
 \begin{frame}{Git is\ldots}
   \hangindent=30pt \Huge {
   \ldots hard because efficiently managing version control and collaboration is
-  hard.
+  hard.*
   }
 \end{frame}
 
@@ -187,23 +243,76 @@ git config --global user.email "raman@uchicago.edu"
   \begin{gitCommand}git checkout\end{gitCommand}
 \end{frame}
 
+%% Reviewing history: git log
 \begin{frame}[fragile]{Reviewing history: git log}
+  Default log; type \texttt{q} to quit:
+
+  \begin{gitCommand}git log\end{gitCommand}
+
+  Limit the output to just the two most recent commits, and show some extra
+  statistics:
+
+  \begin{gitCommand}git log --stat -2\end{gitCommand}
+
+  A single line of output per commit:
+
+  \begin{gitCommand}git log --oneline\end{gitCommand}
+
+  And much, much more.
+
+  \begin{gitCommand}git help log\end{gitCommand}
 \end{frame}
 
+%% Tracking down changes: git diff
 \begin{frame}[fragile]{Tracking down changes: git diff}
+
+  \texttt{HEAD} is a ``You Are Here'' pointer. Tilde notation lets us
+  walk back in history.
+
+  \begin{gitCommand}git diff HEAD~\end{gitCommand}
+
+  Equivalently:
+
+  \begin{gitCommand}git diff HEAD~1\end{gitCommand}
+
+  From three commits ago to one commit ago:
+
+  \begin{gitCommand}git diff HEAD~3 HEAD~1\end{gitCommand}
+
+  You can specify with hashes, and single out specific files:
+
+  \begin{gitCommand}git diff [older hash] [newer hash] [path]\end{gitCommand}
+
+
 \end{frame}
 
+%% Seeing old versions: git show
 \begin{frame}[fragile]{Seeing old versions: git show}
+  To see the contents of an old version of a single file on the screen:
+
+  \begin{gitCommand}git show [commit]:[path]\end{gitCommand}
+
+  You can redirect it to a file outside of the repo to recover an old version.
 \end{frame}
 
 \begin{frame}[fragile]{Going back in time: git checkout}
+  Rewrite the contents of the directory to reflect the repository one commit
+  ago:
+
+  \begin{gitCommand}git checkout HEAD~1\end{gitCommand}
+
+  Rewrite them back:
+
+  \begin{gitCommand}git checkout master\end{gitCommand}
+
 \end{frame}
 
 %% Git is not...
 %% ...a great system for archiving the data created in (experimental) projects.
 \begin{frame}{Git is not\ldots}
   \hangindent=30pt \Huge {
-  \ldots a great system for archiving the data created in (experimental) projects.
+  \ldots a great system for archiving the data created in (experimental)
+  \emph{projects}.
   }
 \end{frame}
 
@@ -211,7 +320,7 @@ git config --global user.email "raman@uchicago.edu"
 %% ...ideal for storing bulky data.
 \begin{frame}{Git is not\ldots}
   \hangindent=30pt \Huge {
-  \ldots ideal for storing bulky data.
+  \ldots ideal for storing bulky data.*
   }
 \end{frame}
 
@@ -224,13 +333,22 @@ git config --global user.email "raman@uchicago.edu"
 \end{frame}
 
 %% Git is not...
-%% ...a golden bullet for collaborating on written works.
+%% ...a silver bullet for collaborating on written works.
 \begin{frame}{Git is not\ldots}
   \hangindent=30pt \Huge {
-  \ldots a golden bullet for collaborating on written works.
+  \ldots a silver bullet for collaborating on written works.
   }
 \end{frame}
 
 %% Ph.D. comic
+\begin{frame}{Git is\ldots}
+  \begin{figure}
+    \includegraphics[scale=0.5]{phd101212s.png}
+    \\ \ldots better than many alternatives!
+  \end{figure}
+  \footnotesize{``Piled Higher and Deeper'' by Jorge Cham\\
+    www.phdcomics.com}
+
+\end{frame}
 
 \end{document}

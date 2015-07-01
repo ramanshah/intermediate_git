@@ -30,38 +30,54 @@ Leveraging Git often means you strip off a part of your research work that can b
 
 Have students clone a simple repo. (Maybe ramanshah/standup_snitch - it's very small and very clean.) Offer the following tools:
 
-ls -R
 ls -al
 cat
 
-Point out .gitignore. Have them poke around in .git. Hand out
-questions that they'll answer in ~3 minutes of independent activity:
+Point out .gitignore. Model ls -al and cat to look at .gitignore.
 
-(1) What do the contents of .gitignore look like?
+Have them poke around in .git. Hand out one question set to each student that they'll answer
+in ~3 minutes of independent activity:
 
-(2) The file .git/HEAD refers to another file in .git. Which file? What is in that file? How many digits does it have?
+*** Questions
 
-(3)
+(1) The file .git/HEAD refers to another file in .git. Which file? What is in that file? How many digits does it have?
+(2) What does the file .git/index have in it? Is it human-readable?
 
-Depends on whether you take the red pill or the blue pill. One way to look at it: You have a normal directory with a .git subdirectory, so it's a Git repo. The other way to look at it: there's a .git subdirectory that knows and runs everything in the directory except the files you're ignoring. The .git subdirectory will pull out files into the rest of your directory, the "working tree", when you issue the right Git commands, replacing what's currently there. Many students have expressed to me that Git is "dangerous" - but it's only dangerous from the first point of view and can only destroy uncommitted stuff, unless you ask it to.
+(1) What is in the file .git/refs/remotes/origin/master? How many digits does it have?
+(2) What does the file .git/config have in it? Is it human-readable?
+
+(1) The file .git/ORIG_HEAD refers to another file in .git/objects. How many digits does it have?
+(2) What does the file .git/COMMIT_EDITMSG have in it? Is it human-readable?
+
+(1) .git/objects has a bunch of subdirectories with two digits. List the contents of one of them. What files are in the subdirectories? How many digits are in the filenames? How many digits in total, between the subdirectories and filenames?
+(2) Look at the contents of one of the files. Is it human-readable?
 
 ** ...safe because it tracks every single bit in your files and commits with hash functions.
 
-Teach hash functions.
+Teach hash functions. SHA-1 is a "one-way" function that takes a file and computes a 160-bit value (which is 40 hexadecimal digits) based on its contents in a very scrambly way. Useful for never storing a password in clear text but also for data integrity. Ideally two different files have a chance of 1 in 2^80 of having the same 160-bit hash.
+
+echo 'a' | sha1sum
 echo 'Hello world' | sha1sum
 echo 'Hello world ' | sha1sum
 
 If you flip one bit in one file under Git version control, it will know.
 
-Show the object model.
+Show the object model. Show illustrations. Note the content addressability means that if you move a file between Git commits, it won't save the file twice, just put them in trees differently.
 
 ** ...fast because it stores a (compressed) copy of every version of every file locally.
 
-Storing diffs vs. storing objects.
+Model that the git objects are compressed complete files:
+
+cat ./.git/objects/e3/498d1609d7029207148b9a311c71a0286e853a
+git cat-file blob e3498d1609d7029207148b9a311c71a0286e853a
+
+Storing diffs vs. storing objects. Show illustrations. A weakness of this approach is that if you store zillions of versions of a large file like a dataset, pdf, Word document, or executable, your Git repo will get really really big.
+
+Depends on whether you take the red pill or the blue pill. One way to look at it: You have a normal directory with a .git subdirectory, so it's a Git repo. The other way to look at it: there's a .git subdirectory that knows and runs everything in the directory except the files you're ignoring. The .git subdirectory will pull out files into the rest of your directory, the "working tree", when you issue the right Git commands, replacing what's currently there. Many students have expressed to me that Git is "dangerous" - but it's only dangerous from the first point of view and can only destroy uncommitted stuff, unless you ask it to.
 
 ** ...hard because efficiently managing version control and collaboration is hard.
 
-(Also, because it was written by a small, sophisticated group of kernel hackers who didn't worry much about ease of use. Git became dominant because it was fast and safe and later because of Github/network effects. It started out very user-hostile, and gradually some convenience functions got bolted on. Newer software like Mercurial is arguably more user-friendly, but it doesn't have the market share.)
+Asterisk: (Also, because it was written by a small, sophisticated group of kernel hackers who didn't worry much about ease of use. Git became dominant because it was fast and safe and later because of Github/network effects. It started out very user-hostile, and gradually some convenience functions got bolted on. Newer software like Mercurial is arguably more user-friendly, but it doesn't have the market share.)
 
 It's popular in the macho software business to say that things are easy and brag to people about how quickly you learn and work (because you're so smart). I often feel intimidated by these kinds of statements. Screw that. Git is hard. Give it the respect of something that is hard and that requires time and diligence to get good at. You'll improve more quickly than you think.
 
@@ -73,16 +89,40 @@ In four meetings we'll cover about 70-80 pages of a 250 page Git book that's on 
 
 * Playing with the past
 
-git log - show a bunch of flags, have them play
+** git log
+Show a bunch of flags.
 
+Show git help log and model how to find something in a man page.
+
+model:
+git log --since='Apr 2015'
+git log -1 --pretty=format:%H
+
+** git diff
 git diff HEAD~ or git diff HEAD~1
 git diff HEAD~2 HEAD~1
-git diff 0d0ffab 78485d4 .gitignore
 
-git show HEAD~2:
+Model:
+git log -3 --stat
+git diff 0d91f07f3 fe1d70548 list_channels.py
 
+** git show
+git show fe1d70548:./list_channels.py
+
+Sometimes you want to grab an old version of a code.
+
+git show fe1d70548:./list_channels.py > /tmp/list_channels_old.py
+
+** git checkout
 git checkout HEAD~2 - this rewrote all the files in your directory to rewind its state to HEAD~2!!
+
+'Detached HEAD state' - git status
+
 git checkout master
+
+git status
+
+We'll understand this more deeply on day 3: the thing to know now is that Git is complaining when HEAD does not coincide with the tip of a branch, and you make it better by re-checking out the tip of the branch.
 
 * Git is not...
 
@@ -94,14 +134,16 @@ Not that we don't do it! But Git is best at managing the semantic structure of a
 
 ** ...ideal for storing bulky data.
 
-Because it stores every version of every file, and everybody (not the big data cluster where you're working) has to download a copy with their clone. Git LFS is a very new extension that gets around some of these issues.
+Because it stores every version of every file, and everybody (not the big data cluster where you're working) has to download a copy with their clone.
+
+Asterisk: Git LFS is a very new extension that gets around some of these issues.
 
 ** ...quite as helpful for binary files as for text files.
 
 Because you don't get diff or merge capabilities. Versioning a Word document or pdf is something Git will do, but it misses the point. Better to version the LaTeX code, and possibly throw in the pdf as a convenience.
 
-** ...a golden bullet for collaborating on written works.
+** ...a silver bullet for collaborating on written works.
 
-(The changes tend to be promiscuous; versioning figures or typeset documents starts to get bloated. But I still do it, especially with LaTeX or other pain-text typesetting technology - both my last first-author paper and my dissertation were git repositories. I don't know of a golden bullet for working on drafts with your adviser. Git's better than nothing.)
+(The changes tend to be promiscuous; versioning figures or typeset documents starts to get bloated. But I still do it, especially with LaTeX or other pain-text typesetting technology - both my last first-author paper and my dissertation were git repositories. I don't know of a silver bullet for working on drafts with your adviser. Git's better than nothing.)
 
 Ph.D. comic "FINAL".
