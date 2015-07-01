@@ -38,19 +38,7 @@ Point out .gitignore. Model ls -al and cat to look at .gitignore.
 Have them poke around in .git. Hand out one question set to each student that they'll answer
 in ~3 minutes of independent activity:
 
-*** Questions
-
-(1) The file .git/HEAD refers to another file in .git. Which file? What is in that file? How many digits does it have?
-(2) What does the file .git/index have in it? Is it human-readable?
-
-(1) What is in the file .git/refs/remotes/origin/master? How many digits does it have?
-(2) What does the file .git/config have in it? Is it human-readable?
-
-(1) The file .git/ORIG_HEAD refers to another file in .git/objects. How many digits does it have?
-(2) What does the file .git/COMMIT_EDITMSG have in it? Is it human-readable?
-
-(1) .git/objects has a bunch of subdirectories with two digits. List the contents of one of them. What files are in the subdirectories? How many digits are in the filenames? How many digits in total, between the subdirectories and filenames?
-(2) Look at the contents of one of the files. Is it human-readable?
+*** Hand out questions (questions.txt)
 
 ** ...safe because it tracks every single bit in your files and commits with hash functions.
 
