@@ -117,7 +117,12 @@ We'll understand this more deeply on day 3: the thing to know now is that Git is
 
 * Git is not...
 
-** ...documenting (experimental) projects.
+** ...GitHub.
+Git is a version control system. GitHub is a website that hosts a Git server for you. It helped Git get popular and offers a nice user interface, social capabilities, and a way to make a rudimentary website for your project with GitHub issues and readmes in GitHub Markdown.
+
+But you could stand up your own Git server if you wanted! Or you could use other websites that host Git servers like Atlassian Bitbucket (which offers free private repos). Except for the clones, we're not going to touch GitHub at all for the first three days.
+
+** ...a great system for documenting (experimental) projects.
 
 Its worldview is one where things get modified. If you're just adding a subdirectory for each day you run a calculation with the input and results, you're missing the point of Git.
 
