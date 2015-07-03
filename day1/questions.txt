@@ -7,20 +7,10 @@
 
 
 
-(1) What is in the file `.git/refs/remotes/origin/master`? How many
-    digits does it have?
+(1) The file `.git/packed-refs` has a long code in it. How many digits
+    does it have?
 
 (2) What does the file `.git/config` have in it? Is it human-readable?
-
-
-
-
-
-(1) The file `.git/ORIG_HEAD` refers to another file in
-    `.git/objects`. How many digits does it have?
-
-(2) What does the file `.git/COMMIT_EDITMSG` have in it? Is it
-    human-readable?
 
 
 
