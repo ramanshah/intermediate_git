@@ -56,8 +56,13 @@ Show the object model. Show illustrations. Note the content addressability means
 
 Model that the git objects are compressed complete files:
 
-cat ./.git/objects/e3/498d1609d7029207148b9a311c71a0286e853a
-git cat-file blob e3498d1609d7029207148b9a311c71a0286e853a
+git ls-tree HEAD
+git ls-tree HEAD~1
+
+So standup_snitch.py changed in the last commit. Look at the old version...
+
+cat .git/objects/18/1fe4b564083d6a12832ea46aaf31ebbc461a5c
+git cat-file blob 181fe4b564083d6a12832ea46aaf31ebbc461a5c
 
 Storing diffs vs. storing objects. Show illustrations. A weakness of this approach is that if you store zillions of versions of a large file like a dataset, pdf, Word document, or executable, your Git repo will get really really big.
 
@@ -143,3 +148,4 @@ Because you don't get diff or merge capabilities. Versioning a Word document or 
 (The changes tend to be promiscuous; versioning figures or typeset documents starts to get bloated. But I still do it, especially with LaTeX or other pain-text typesetting technology - both my last first-author paper and my dissertation were git repositories. I don't know of a silver bullet for working on drafts with your adviser. Git's better than nothing.)
 
 Ph.D. comic "FINAL".
+
