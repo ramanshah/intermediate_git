@@ -8,7 +8,7 @@ Two sticking points in being productive with Git are understanding the staging a
 
 A lot of beginning Git courses have you do a "Hello World" commit from a tiny simple project. My experience is that in the real world, you've already hacked around some to build something a bit nontrivial (or you're taking over some long-standing project that wasn't under version control), and you have some messy project that will need a little care to put under Git properly.
 
-The staging area is a middle ground where you prepare material for a commit. It can be instrumental in
+The staging area is a middle ground where you prepare material for a commit. It is instrumental in incrementally bringing order to an existing legacy codebase as well as, for instance, resolving merge conflicts.
 
 **
 
@@ -16,14 +16,16 @@ The staging area is a middle ground where you prepare material for a commit. It 
 
 (2) git init; git status
 
-(3) explain .gitignore - what it's for, and how to use it. Meta issue - you'll check .gitignore into the repo. But it's the copy in the working directory that
+(3) explain .gitignore - what it's for, and how to use it. Meta issue - you'll check .gitignore into the repo. But it's the copy in the working directory that controls what Git tracks.
+
+
 
 (4) Have students .gitignore stuff until it looks good.
 
 git status
 git ls-files --others --exclude-standard
 
-(5)
+(5) Commit with the .gitignore.
 
 git diff
 git diff --cached

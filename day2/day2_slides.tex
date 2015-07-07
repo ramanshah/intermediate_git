@@ -1,0 +1,55 @@
+\input{../preamble}
+
+\title{Intermediate Git}
+\subtitle{Day 2: Ignoring Files and Fixing Mistakes}
+\author{Raman A.~Shah}
+\date{}
+
+\begin{document}
+
+%% Title
+\begin{frame}[plain]
+  \titlepage
+  \footnotesize{Copyright (c) 2015 by Raman A.~Shah.\\
+  \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}
+       {Creative Commons BY-NC-SA 3.0 Unported}.\\
+   \href{https://github.com/ramanshah/intermediate\_git}
+        {https://github.com/ramanshah/intermediate\_git}}
+\end{frame}
+
+\begin{frame}[fragile]{``Glob patterns''}
+  Ignore any file ending with \texttt{.txt}:
+
+  \begin{gitCommand}*.txt\end{gitCommand}
+
+  But don't ignore \texttt{IMPORTANT.txt}:
+
+  \begin{gitCommand}!IMPORTANT.txt\end{gitCommand}
+
+  Ignore \texttt{temp0.out}, \ldots, \texttt{temp9.out}, but not
+  \texttt{tempa.out}:
+
+  \begin{gitCommand}temp[0-9].out\end{gitCommand}
+
+  Ignore \texttt{temp0.out}, \ldots, \texttt{temp9.out}, and also
+  \texttt{tempa.out}:
+
+  \begin{gitCommand}temp?.out\end{gitCommand}
+\end{frame}
+
+\begin{frame}[fragile]{``Glob patterns,'' continued}
+  Ignore file \texttt{JUNK.tmp} anywhere in the repo:
+
+  \begin{gitCommand}JUNK.tmp\end{gitCommand}
+
+  Ignore file \texttt{JUNK.tmp} in the root directory, but don't ignore
+  \texttt{subdir/JUNK.tmp}:
+
+  \begin{gitCommand}/JUNK.tmp\end{gitCommand}
+
+  Ignore all files in the subdirectory \texttt{subdir}:
+
+  \begin{gitCommand}subdir/\end{gitCommand}
+\end{frame}
+
+\end{document}
