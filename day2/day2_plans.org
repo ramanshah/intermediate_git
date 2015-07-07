@@ -6,11 +6,9 @@ http://justinhileman.info/article/git-pretty/git-pretty.png
 
 Two sticking points in being productive with Git are understanding the staging area and the branching model; we'll work on the first of these today and the second one next time.
 
-A lot of beginning Git courses have you do a "Hello World" commit from a tiny simple project. My experience is that in the real world, you've already hacked around some to build something a bit nontrivial (or you're taking over some long-standing project that wasn't under version control), and you have some messy project that will need a little care to put under Git properly.
+A lot of beginning Git courses have you do a "Hello World" commit from a tiny simple project. My experience is that in the real world, you've already hacked around some to build something a bit nontrivial (or you're taking over some long-standing project that wasn't under version control), and you have some messy project that will need a little care to put under Git properly. Most of this work is ignoring stuff that shouldn't be tracked. If you do a good job of this, cleaning up other messes becomes considerably easier.
 
-The staging area is a middle ground where you prepare material for a commit. It is instrumental in incrementally bringing order to an existing legacy codebase as well as, for instance, resolving merge conflicts.
-
-**
+** .gitignore
 
 (1) Unzip messy project
 
@@ -18,22 +16,63 @@ The staging area is a middle ground where you prepare material for a commit. It 
 
 (3) explain .gitignore - what it's for, and how to use it. Meta issue - you'll check .gitignore into the repo. But it's the copy in the working directory that controls what Git tracks.
 
-
-
 (4) Have students .gitignore stuff until it looks good.
 
 git status
 git ls-files --others --exclude-standard
 
-(5) Commit with the .gitignore.
+** Understanding the staging area
+
+The staging area is a middle ground where you prepare material for a commit. It is instrumental in incrementally bringing order to an existing legacy codebase as well as, for instance, resolving merge conflicts.
+
+Simple: strip off the .gitignore into a commit. Top line of the Git Pretty flowchart.
+  git add
+
+Strip off other parts into a commit.
+
+git commit -a:
+For every file that was already tracked, automatically stage it.
+Don't recommend until you're fluent - most Git messes I get called in to fix involve promiscuous auto-staging of files.
+
+Put a file where the previous commit, working tree, and staging areas are all different.
+
+Diagram types of diff
 
 git diff
 git diff --cached
 git diff HEAD
 
-Dirty
+Diagram ways to move states of the files
 
-Fix a commit - open source style guidelines for commit style?
+** Common mistakes and how to fix them
 
+I screwed everything up. Can we just get back to the last commit?
+  git reset --hard
+
+I staged something by accident. Can we unstage it?
+  git reset
+
+Can I get back to an old version of a single file?
+  git checkout -- [path]
+  git checkout [commitish] [path]
+
+I need to move a file.
+  git mv
+I need to remove a file.
+  git rm
+I forgot to ignore something and now it's chasing me around.
+  git rm
+  .gitignore
+
+I need to fix up the commit I just did.
+Open course guidelines for Git commits.
+
+  git commit --amend
+
+Can we throw away the last n commits?
+  git reset --hard HEAD~n
+  and git revert HEAD~n
+
+Caveat: Golden Rule of Git - we're sticking to local stuff today and next time, but once you expose your work to collaborators with GitHub, people are basing their work on your tree of commits. If you replace nodes on an existing tree of history with similar ones, you can completely thrash other people's work, and you'll make them miserable and angry.
 
 Have students vote - interested in rebasing as a day 5 on 30 July?

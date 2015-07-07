@@ -17,6 +17,50 @@
         {https://github.com/ramanshah/intermediate\_git}}
 \end{frame}
 
+%% Work hard to exclude...
+\begin{frame}{Work hard to exclude\ldots}
+  \hangindent=26pt \huge {
+  \ldots secrets.
+  }
+\end{frame}
+
+\begin{frame}{Work hard to exclude\ldots}
+  \hangindent=26pt \huge {
+  \ldots large unnecessary files.
+  }
+\end{frame}
+
+\begin{frame}{Work hard to exclude\ldots}
+  \hangindent=26pt \huge {
+  \ldots junk from your operating system and development environment.
+  }
+\end{frame}
+
+%% The Golden Rule of Git
+\begin{frame}{The Golden Rule of Git}
+  \huge {
+  Never modify history that someone else has seen.
+  }
+\end{frame}
+
+%% Initializing a Git repository
+\begin{frame}[fragile]{Initializing a Git repository}
+  From the directory that you're hoping to turn into a Git repository:
+
+  \begin{gitCommand}git init\end{gitCommand}
+
+  Survey the candidates to put under version control:
+
+  \begin{gitCommand}git status\end{gitCommand}
+
+  Survey the files within a subdirectory:
+
+  \begin{gitCommand}git ls-files --others \
+  --exclude-standard [subdir]
+  \end{gitCommand}
+\end{frame}
+
+%% Glob patterns
 \begin{frame}[fragile]{``Glob patterns''}
   Ignore any file ending with \texttt{.txt}:
 
@@ -32,7 +76,7 @@
   \begin{gitCommand}temp[0-9].out\end{gitCommand}
 
   Ignore \texttt{temp0.out}, \ldots, \texttt{temp9.out}, and also
-  \texttt{tempa.out}:
+  \texttt{tempa.out} (but not \texttt{temp\_a.out}):
 
   \begin{gitCommand}temp?.out\end{gitCommand}
 \end{frame}
@@ -50,6 +94,27 @@
   Ignore all files in the subdirectory \texttt{subdir}:
 
   \begin{gitCommand}subdir/\end{gitCommand}
+
+  Ignore \texttt{log/foo.log} but not \texttt{foo.log} in the root directory:
+
+  \begin{gitCommand}log/*.log\end{gitCommand}
+\end{frame}
+
+%% Commit message style guide
+\begin{frame}{Commit message style guide}
+  \begin{itemize}
+    \item First line: $ \le 50 $ columns, imperative mood.
+    \item Second line: blank.
+    \item Subsequently: paragraph form, 72 columns, blank line between
+          paragraphs.
+  \end{itemize}
+
+  \begin{figure}
+    \includegraphics[scale=0.35]{pope_commit_message.png}
+  \end{figure}
+  \footnotesize{Tim Pope,
+    \href{http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html}
+         {\emph{A Note About Git Commit Messages}}}
 \end{frame}
 
 \end{document}
