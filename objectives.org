@@ -19,7 +19,8 @@
 ** SWBAT explain style guidelines for a commit message
 ** SWBAT fix a commit message with `git commit --amend`
 ** SWBAT use `git rm`, `git mv`, and `git checkout` to change previously committed files
-** SWBAT go back to the most recent commit with `git reset --hard`
+** SWBAT go back to a recent commit with `git reset --hard`
+** SWBAT use `git revert` to reverse a commit that's already public
 * Day 3: Branching and Merging
 ** SWBAT explain why Git branches are so efficient
 ** SWBAT create a local branch and commit to it with `git branch` and `git checkout -b`
@@ -32,7 +33,6 @@
 * Day 4: Collaborating on Github
 ** SWBAT use `git remote` to manage remote repositories
 ** SWBAT push/pull branches to/from github with `git push` and `git pull`
-** SWBAT use `git revert` to reverse a commit that's already public
 ** SWBAT create and assign a pull request to a repo where they have push access
 ** SWBAT review a collaborator's pull request and explain the meaning of 'LGTM'
 ** SWBAT explain why it can be confusing to work on master
