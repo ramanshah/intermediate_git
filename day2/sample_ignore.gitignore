@@ -1,0 +1,12 @@
+# Mac OS X filesystem cache
+.DS_Store
+
+# TeX intermediate files
+*.log
+*.aux
+
+# Secret
+secret_api_token.txt
+
+# Scratch subdirectory
+scratch_work/
