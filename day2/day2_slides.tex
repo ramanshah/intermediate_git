@@ -281,13 +281,13 @@ git add [new path]
   \begin{gitCommand}git reset --hard HEAD~1\end{gitCommand}
 \end{frame}
 
-%% I wish the last commit never happened, but I want to keep the
+%% I wish the last n commits never happened, but I want to keep the
 %% current stuff in the working tree.
 \begin{frame}[fragile]{Committed mistake \#4}
-  \color{ucMaroon}{I wish the last commit never happened, but I want
+  \color{ucMaroon}{I wish the last $ n $ commits never happened, but I want
   to keep the current stuff in the working tree.}
 
-  \begin{gitCommand}git reset HEAD~1\end{gitCommand}
+  \begin{gitCommand}git reset HEAD~n\end{gitCommand}
 \end{frame}
 
 %% The Golden Rule of Git
