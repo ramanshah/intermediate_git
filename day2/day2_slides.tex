@@ -116,16 +116,64 @@ cd sample
   \end{gitCommand}
 \end{frame}
 
-\begin{frame}{Scopes of \texttt{git reset}}
+\begin{frame}[fragile]{Staging your changes}
+  To stage a modified file for the next commit:
+
+  \begin{gitCommand}git add [path]\end{gitCommand}
+
+  To unstage a staged file:
+
+  \begin{gitCommand}git reset HEAD [path]\end{gitCommand}
+
+  When ready to commit:
+
+  \begin{gitCommand}git commit\end{gitCommand}
+
+  To write a commit message inline:
+
+  \begin{gitCommand}git commit -m [message]\end{gitCommand}
+
+\end{frame}
+
+\begin{frame}{Examining the staging area}
   \begin{figure}
-    \includegraphics[scale=0.4]{reset_scopes.eps}
-    \\ \texttt{--mixed} is the default.
+    \includegraphics[scale=0.32]{diffs.pdf}
   \end{figure}
-  \footnotesize{Atlassian,
-    \emph{Reset, Checkout, and Revert}.\\
-    \href{http://creativecommons.org/licenses/by/2.5/au/legalcode}{CC-BY Australia}.
-    \href{https://www.atlassian.com/git/tutorials/}
-    {https://www.atlassian.com/git/tutorials/}}
+\end{frame}
+
+\begin{frame}{Manipulating files}
+  \begin{figure}
+    \includegraphics[scale=0.32]{manipulations.pdf}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Removing files}
+  To stage a file for deletion (and simultaneously delete it from the
+  working tree):
+
+  \begin{gitCommand}git rm [path]\end{gitCommand}
+
+  Git will complain if there are local or staged changes. To force removal:
+
+  \begin{gitCommand}git rm -f [path]\end{gitCommand}
+
+  To stage the file for deletion only from the Git history, leaving the working directory alone:
+
+  \begin{gitCommand}git rm --cached [path]\end{gitCommand}
+\end{frame}
+
+\begin{frame}[fragile]{Moving files}
+  Because of content addressability, this:
+
+  \begin{gitCommand}git mv [old path] [new path]\end{gitCommand}
+
+  is the same as this:
+
+  \begin{gitCommand}
+mv [old path] [new path]
+git rm [old path]
+git add [new path]
+  \end{gitCommand}
 
 \end{frame}
 
@@ -146,6 +194,20 @@ cd sample
   \qquad
 
   \begin{gitCommand}git reset --hard HEAD\end{gitCommand}
+\end{frame}
+
+%% Scopes of git reset
+\begin{frame}{Scopes of git reset}
+  \begin{figure}
+    \includegraphics[scale=0.4]{reset_scopes.eps}
+    \\ \texttt{--mixed} is the default.
+  \end{figure}
+  \footnotesize{Atlassian,
+    \emph{Reset, Checkout, and Revert}.\\
+    \href{http://creativecommons.org/licenses/by/2.5/au/legalcode}{CC-BY Australia}.
+    \href{https://www.atlassian.com/git/tutorials/}
+    {https://www.atlassian.com/git/tutorials/}}
+
 \end{frame}
 
 %% I modified one file incorrectly but didn't commit. Can I restore just that one file?

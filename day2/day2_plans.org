@@ -40,20 +40,14 @@ Give students 3-4 minutes to work on .gitignore until git status shows only the 
 
 * Understanding the staging area
 
+** Staging your changes
+Show of hands: Do you know what a "staging area" is in a construction site?
+
 The staging area is where you prepare material for a commit. In Git, changes don't just go straight from the working directory into a commit. It is instrumental in incrementally bringing order to an existing legacy codebase as well as, for instance, resolving merge conflicts. But it can be confusing at first. "Beginning" Git tutorials often feature a "git add ." really early on. This is a recipe for disaster when you already have some complexity in this project - and especially if you weren't abundantly careful with .gitignore like we were. We're going to slow down and do this more carefully.
 
-First commit: Strip off the .gitignore into a commit. Top line of the Git Pretty flowchart.
-  git add
+First commit: Strip off the .gitignore into a commit. Top line of the Git Pretty flowchart. Strip off other parts into commit, and get the project stable. For one of them show the opposite of git add: git reset HEAD [file].
 
-Strip off other parts into commit, and get the project stable.
-For one of them show the opposite of git add: git reset HEAD [file].
-
----
-
-Before going too much farther, teach git reset in a bit more depth.
-Scopes of git reset.
-
----
+** Examining the staging area
 
 Put a file where the previous commit, working tree, and staging areas are all different.
 
@@ -63,17 +57,17 @@ git diff
 git diff --cached
 git diff HEAD
 
-Diagram ways to move states of the files
+** Manipulating files
 
-I need to move a file.
-  git mv
-I need to remove a file.
-  git rm
-  git rm -f
+Diagram ways to move states of the files. Point out the pair to stage and unstage the file. But also a way to replace the working copy with the old committed version, relevant later in fixing mistakes, and also a way to replace the working copy with the staged version, which is less common.
 
-git commit -a:
-For every file that was already tracked, automatically stage it.
-I'm not emphasizing this because I don't recommend using it until you're fluent - most Git messes I get called in to fix resulted from promiscuous auto-staging of files.
+Note that "checkout" by default changes the working tree, while "reset" by default changes the staging area. But these lines are blurred by the options available to these commands.
+
+** Removing files
+In addition to adding or changing files, any filesystem should allow for deleting and moving files. Git does so. git rm stages a file for deletion, also deleting it from the working tree for your convenience. But it won't do it if you've changed and staged the file already, unless you force it to. Subtly, it's also possible to stage a file to be removed from Git without removing it from the working tree: this will be useful in one of the mistakes we fix later.
+
+** Moving files
+An interesting thing about content addressability is that Git can actually figure out from the hashes if you've moved a file - git mv is just a convenience function.
 
 * Fixing common mistakes
 
@@ -83,6 +77,9 @@ Once you've done a good job of ignoring things and routinely sit in a clean repo
 
 ** I screwed everything up but didn't commit. How do I return to my most recent commit?
 git reset --hard HEAD
+
+** Scopes of git reset
+We used git reset with the default mixed option to unstage a file. But you can "soften" this command to only reset the position of HEAD in the commit history (which reduces it to nothing unless you go back farther than HEAD) or "harden" it to reset not only the position of HEAD and the state of the staging area, but the working tree too.
 
 ** I modified one file incorrectly but didn't commit. Can I restore just that one file?
 git checkout HEAD [path]
@@ -120,6 +117,11 @@ Having a short first line and a blank line after it is pretty important for your
 Model that the commit hashes changed.
 
 ** I wish the last commit never happened. Can we throw it away?
+Make a bad commit with git commit -a.
+
+git commit -a: For every file that was already tracked, automatically stage it.
+I'm not emphasizing this because I don't recommend using it until you're fluent - most Git messes I get called in to fix resulted from promiscuous auto-staging of files. You'll do it routinely, but for this class, I wanted to slow down so you can see the individual steps more clearly.
+
 git reset --hard HEAD~1
 
 ** I wish the last commit never happened, but I want to keep the current stuff in the working tree.
