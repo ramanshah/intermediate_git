@@ -1,38 +1,59 @@
 * Intro
-** The Staging Area
-
-Hand out copies of "Git Pretty"
+Hand out copies of "Git Pretty."
 http://justinhileman.info/article/git-pretty/git-pretty.png
 
 Two sticking points in being productive with Git are understanding the staging area and the branching model; we'll work on the first of these today and the second one next time.
 
 A lot of beginning Git courses have you do a "Hello World" commit from a tiny simple project. My experience is that in the real world, you've already hacked around some to build something a bit nontrivial (or you're taking over some long-standing project that wasn't under version control), and you have some messy project that will need a little care to put under Git properly. Most of this work is ignoring stuff that shouldn't be tracked. If you do a good job of this, cleaning up other messes becomes considerably easier.
 
-** .gitignore
+* .gitignore
 
-(1) Unzip messy project
+** Use .gitignore for...
 
-(2) git init; git status
+*** ...secrets.
+If you commit them into Git, even if you remove them in a future commit, they'll be visible to someone who looks back in history.
 
-(3) explain .gitignore - what it's for, and how to use it. Meta issue - you'll check .gitignore into the repo. But it's the copy in the working directory that controls what Git tracks.
+Example: api token and group member names in standup_snitch.
 
-(4) Have students .gitignore stuff until it looks good.
+*** ...local configuration.
+You can have toy files on your localhost and big data files on the server. Make it configurable inside your software, and set the ignored file in the two places to point do different things.
 
-git status
-git ls-files --others --exclude-standard
+*** ...large unnecessary files.
+They will make cloning your repo slow for everyone forever more.
 
-** Understanding the staging area
+Sometimes large files are necessary - for example, the pdf slides for this course. But Git/GitHub will start to strain once you go beyond a few tens of MB.
 
-The staging area is a middle ground where you prepare material for a commit. It is instrumental in incrementally bringing order to an existing legacy codebase as well as, for instance, resolving merge conflicts.
+*** ...junk from your operating system and development environment.
+Stuff like temp files from your editor. Directory caches from your operating system. .o or .a files from compiling C/C++ projects. These will keep changing as your project changes. Keeping up with them becomes confusing and slows you down in the future.
 
-Simple: strip off the .gitignore into a commit. Top line of the Git Pretty flowchart.
+** Glob patterns
+Star wildcard is probably familiar. Exclamation points, ranges or sets in square brackets, and question marks may not be.
+
+You can use slashes to ignore entire subdirectories or to have fine-grained control over ignoring some files or kinds of files in one subdirectory but not another.
+
+** Initializing a Git repository
+Clone the repo with the course materials just to get a compressed tarball of a messy example project. It has some R code, a paper, and a directory with scratch work that we wouldn't want to publish as part of the repo.
+
+Meta chicken-and-egg issue - you'll check .gitignore into the repo. But it's the copy in the working directory that controls what Git tracks.
+
+Give students 3-4 minutes to work on .gitignore until git status shows only the things we want in there.
+
+* Understanding the staging area
+
+The staging area is where you prepare material for a commit. In Git, changes don't just go straight from the working directory into a commit. It is instrumental in incrementally bringing order to an existing legacy codebase as well as, for instance, resolving merge conflicts. But it can be confusing at first. "Beginning" Git tutorials often feature a "git add ." really early on. This is a recipe for disaster when you already have some complexity in this project - and especially if you weren't abundantly careful with .gitignore like we were. We're going to slow down and do this more carefully.
+
+First commit: Strip off the .gitignore into a commit. Top line of the Git Pretty flowchart.
   git add
 
-Strip off other parts into a commit.
+Strip off other parts into commit, and get the project stable.
+For one of them show the opposite of git add: git reset HEAD [file].
 
-git commit -a:
-For every file that was already tracked, automatically stage it.
-Don't recommend until you're fluent - most Git messes I get called in to fix involve promiscuous auto-staging of files.
+---
+
+Before going too much farther, teach git reset in a bit more depth.
+Scopes of git reset.
+
+---
 
 Put a file where the previous commit, working tree, and staging areas are all different.
 
@@ -44,35 +65,72 @@ git diff HEAD
 
 Diagram ways to move states of the files
 
-** Common mistakes and how to fix them
-
-I screwed everything up. Can we just get back to the last commit?
-  git reset --hard
-
-I staged something by accident. Can we unstage it?
-  git reset
-
-Can I get back to an old version of a single file?
-  git checkout -- [path]
-  git checkout [commitish] [path]
-
 I need to move a file.
   git mv
 I need to remove a file.
   git rm
-I forgot to ignore something and now it's chasing me around.
-  git rm
-  .gitignore
+  git rm -f
 
-I need to fix up the commit I just did.
-Open course guidelines for Git commits.
+git commit -a:
+For every file that was already tracked, automatically stage it.
+I'm not emphasizing this because I don't recommend using it until you're fluent - most Git messes I get called in to fix resulted from promiscuous auto-staging of files.
 
-  git commit --amend
+* Fixing common mistakes
 
-Can we throw away the last n commits?
-  git reset --hard HEAD~n
-  and git revert HEAD~n
+Show picture of climber.
 
-Caveat: Golden Rule of Git - we're sticking to local stuff today and next time, but once you expose your work to collaborators with GitHub, people are basing their work on your tree of commits. If you replace nodes on an existing tree of history with similar ones, you can completely thrash other people's work, and you'll make them miserable and angry.
+Once you've done a good job of ignoring things and routinely sit in a clean repo, Git makes your life much safer. I've heard more than one student here say that Git their work less safe - but once you gain some proficiency, you can hack mercilessly on your code or writing and rest assured that you can get back to your last commit.
 
-Have students vote - interested in rebasing as a day 5 on 30 July?
+** I screwed everything up but didn't commit. How do I return to my most recent commit?
+git reset --hard HEAD
+
+** I modified one file incorrectly but didn't commit. Can I restore just that one file?
+git checkout HEAD [path]
+
+** I forgot to ignore something, and now it has changed and is chasing me around.
+This one is subtle but shows the power of the staging area. There are a number of ways to do it listed on StackOverflow; this is one of them.
+
+git rm --cached [path]
+
+This marks it for deletion from the Git repo in the staging area (but leaves the working copy alone!)
+
+git commit
+
+Then add the file to .gitignore.
+
+Note that you didn't damage the modified file that was chasing you around!
+
+If you don't commit its removal before adding it to .gitignore, you put Git into a schizophrenic state, where the file is explicitly indexed in the repo, but you're also telling it explicitly that it shouldn't be there.
+
+** My most recent commit is half-baked. Can I bake it better?
+
+Stage the changes to the files:
+
+git add [path]
+
+Then commit with a fresh message:
+
+git commit --amend
+
+** Commit message style guide
+As an aside: Open source communities typically have pretty stringent guidelines for Git commits. They often require that you put together a monolithic commit that tightly solves a single problem or adds a single feature and with a well-written commit message that follows some tight guidelines. An important tool in doing this is to rewrite history using a dangerous tool called "git rebase" which is maybe advanced - we'll cover it lightly in Day 3 if there's time. But writing good commit messages doesn't require that. Here are the guidelines.
+
+Having a short first line and a blank line after it is pretty important for your messages to play well with Git tooling.
+
+Model that the commit hashes changed.
+
+** I wish the last commit never happened. Can we throw it away?
+git reset --hard HEAD~1
+
+** I wish the last commit never happened, but I want to keep the current stuff in the working tree.
+git reset HEAD~1
+
+** The Golden Rule of Git
+We're sticking to local stuff today and next time, but once you expose your work to collaborators with GitHub, people are basing their work on your tree of commits. The `git reset` command destroys portions of your tree of commits if you ever go fack farther than HEAD. If you replace nodes on an existing tree of history with similar ones, you can completely thrash other people's work, and you'll make them miserable and angry.
+
+Trade-off between having a clean canonical semantic history of your project and a faithful but messier temporal history of your project.
+
+When people have seen the mistake (and may be basing their work on it), resetting is bad, because you're destroying history. Instead, there's the revert command:
+
+** In public: git revert
+git revert HEAD~1

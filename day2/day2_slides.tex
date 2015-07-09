@@ -17,47 +17,29 @@
         {https://github.com/ramanshah/intermediate\_git}}
 \end{frame}
 
-%% Work hard to exclude...
-\begin{frame}{Work hard to exclude\ldots}
+%% Use .gitignore for...
+\begin{frame}{Use \texttt{.gitignore} for \ldots}
   \hangindent=26pt \huge {
   \ldots secrets.
   }
 \end{frame}
 
-\begin{frame}{Work hard to exclude\ldots}
+\begin{frame}{Use \texttt{.gitignore} for \ldots}
+  \hangindent=26pt \huge {
+  \ldots local configuration.
+  }
+\end{frame}
+
+\begin{frame}{Use \texttt{.gitignore} for \ldots}
   \hangindent=26pt \huge {
   \ldots large unnecessary files.
   }
 \end{frame}
 
-\begin{frame}{Work hard to exclude\ldots}
+\begin{frame}{Use \texttt{.gitignore} for \ldots}
   \hangindent=26pt \huge {
   \ldots junk from your operating system and development environment.
   }
-\end{frame}
-
-%% The Golden Rule of Git
-\begin{frame}{The Golden Rule of Git}
-  \huge {
-  Never modify history that someone else has seen.
-  }
-\end{frame}
-
-%% Initializing a Git repository
-\begin{frame}[fragile]{Initializing a Git repository}
-  From the directory that you're hoping to turn into a Git repository:
-
-  \begin{gitCommand}git init\end{gitCommand}
-
-  Survey the candidates to put under version control:
-
-  \begin{gitCommand}git status\end{gitCommand}
-
-  Survey the files within a subdirectory:
-
-  \begin{gitCommand}git ls-files --others \
-  --exclude-standard [subdir]
-  \end{gitCommand}
 \end{frame}
 
 %% Glob patterns
@@ -100,6 +82,119 @@
   \begin{gitCommand}log/*.log\end{gitCommand}
 \end{frame}
 
+%% Initializing a Git repository
+\begin{frame}[fragile]{Initializing a Git repository}
+  Download a compressed example of a messy project not under version control:
+
+  \begin{gitCommand}
+git clone https://github.com/\
+ramanshah/intermediate_git.git
+  \end{gitCommand}
+
+  Pull it out of the course repo and decompress it into a directory:
+
+  \begin{gitCommand}
+cp ./intermediate_git/day2/sample.tgz .
+tar xzvf sample.tgz
+cd sample
+  \end{gitCommand}
+\end{frame}
+
+\begin{frame}[fragile]{Initializing a Git repository}
+  From the directory that you're hoping to turn into a Git repository:
+
+  \begin{gitCommand}git init\end{gitCommand}
+
+  Survey the candidates to put under version control:
+
+  \begin{gitCommand}git status\end{gitCommand}
+
+  Survey the files within a subdirectory:
+
+  \begin{gitCommand}git ls-files --others \
+  --exclude-standard [subdir]
+  \end{gitCommand}
+\end{frame}
+
+\begin{frame}{Scopes of \texttt{git reset}}
+  \begin{figure}
+    \includegraphics[scale=0.4]{reset_scopes.eps}
+    \\ \texttt{--mixed} is the default.
+  \end{figure}
+  \footnotesize{Atlassian,
+    \emph{Reset, Checkout, and Revert}.\\
+    \href{http://creativecommons.org/licenses/by/2.5/au/legalcode}{CC-BY Australia}.
+    \href{https://www.atlassian.com/git/tutorials/}
+    {https://www.atlassian.com/git/tutorials/}}
+
+\end{frame}
+
+%% Fixing common mistakes
+\begin{frame}{Fixing common mistakes}
+  \begin{figure}
+    \includegraphics[scale=0.35]{climbing-756669_640.jpg}
+    \\ Git gives you anchors!
+  \end{figure}
+\end{frame}
+
+%% I screwed everything up but didn't commit. How do I return to my most recent commit?
+\begin{frame}[fragile]{Uncommitted mistake \#1}
+
+  \color{ucMaroon}{I screwed everything up but didn't commit. How do I return
+  to my most recent commit?}
+
+  \qquad
+
+  \begin{gitCommand}git reset --hard HEAD\end{gitCommand}
+\end{frame}
+
+%% I modified one file incorrectly but didn't commit. Can I restore just that one file?
+\begin{frame}[fragile]{Uncommitted mistake \#2}
+
+  \color{ucMaroon}{I modified one file incorrectly but didn't commit. Can I
+  restore just that one file?}
+
+  \qquad
+
+  \begin{gitCommand}git checkout HEAD [path]\end{gitCommand}
+\end{frame}
+
+%% I forgot to ignore something, and now it has changed and is chasing me around.
+\begin{frame}[fragile]{Committed mistake \#1}
+
+  \color{ucMaroon}{I forgot to ignore something, and now it has changed and is
+  chasing me around.}
+
+  \qquad
+
+  \color{black}{First, mark it for deletion in the staging area only:}
+
+  \begin{gitCommand}git rm --cached [path]\end{gitCommand}
+
+  Then commit the deletion:
+
+  \begin{gitCommand}git commit\end{gitCommand}
+
+  Then fix your \texttt{.gitignore} and commit the changes to \texttt{.gitignore}.
+
+\end{frame}
+
+%% My most recent commit is half-baked. Can I bake it better?
+\begin{frame}[fragile]{Committed mistake \#2}
+
+  \color{ucMaroon}{My most recent commit is half-baked. Can I bake it better?}
+
+  \qquad
+
+  \color{black}{Stage your corrections:}
+
+  \begin{gitCommand}git add [path]\end{gitCommand}
+
+  Then commit with a fresh message:
+
+  \begin{gitCommand}git commit --amend\end{gitCommand}
+\end{frame}
+
 %% Commit message style guide
 \begin{frame}{Commit message style guide}
   \begin{itemize}
@@ -117,4 +212,34 @@
          {\emph{A Note About Git Commit Messages}}}
 \end{frame}
 
+%% I wish the last commit never happened. Can we throw it away?
+\begin{frame}[fragile]{Committed mistake \#3}
+  \color{ucMaroon}{I wish the last commit never happened. Can I throw it away?}
+
+  \begin{gitCommand}git reset --hard HEAD~1\end{gitCommand}
+\end{frame}
+
+%% I wish the last commit never happened, but I want to keep the
+%% current stuff in the working tree.
+\begin{frame}[fragile]{Committed mistake \#4}
+  \color{ucMaroon}{I wish the last commit never happened, but I want
+  to keep the current stuff in the working tree.}
+
+  \begin{gitCommand}git reset HEAD~1\end{gitCommand}
+\end{frame}
+
+%% The Golden Rule of Git
+\begin{frame}{The Golden Rule of Git}
+  \huge {
+  Never modify history that someone else has seen.
+  }
+\end{frame}
+
+%% git revert
+\begin{frame}[fragile]{In public: git revert}
+  Instead of deleting history with \texttt{git reset}, make \emph{new}
+  commits that reverse the damage done by a specified commit:
+
+  \begin{gitCommand}git revert HEAD~1\end{gitCommand}
+\end{frame}
 \end{document}
