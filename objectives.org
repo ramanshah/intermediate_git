@@ -30,6 +30,8 @@
 ** SWBAT distinguish a fast-forward from a non-fast-forward merge that has a merge commit
 ** SWBAT delete a merged or unmerged local branch
 ** SWBAT resolve a merge conflict
+** SWBAT use `git rebase` to replay commits onto the tip of another branch
+** SWBAT use `git rebase -i` to squash commits and clean history
 * Day 4: Collaborating on Github
 ** SWBAT use `git remote` to manage remote repositories
 ** SWBAT push/pull branches to/from github with `git push` and `git pull`
