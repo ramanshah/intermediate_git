@@ -1,0 +1,66 @@
+* Intro to the branch model
+pro git 3.2: graph of commits
+
+pro git 3.3-3.4: branches are just a pointer
+
+pro git 3.9: branches can diverge
+
+* Working through a clean branch and merge
+
+We'll do two pieces of work in parallel in three different ways, like Groundhog Day.
+
+** Last class's project
+Have students
+
+** Creating a new branch
+create a branch
+git checkout -b fix_math
+
+short for
+git branch fix_math
+git checkout fix_math
+
+git branch - monitor the state of the branches
+
+pro git 3.5-3.6: checkout switches which branch HEAD points to
+
+** Branches are lightweight
+cat .git/refs/heads/fix_math
+
+The entirety of a Git branch is 41 characters, a 40-character SHA-1 hash pointing to a commit and a newline. This is unlike other kinds of version control systems, where you might have to copy the entire codebase to make a branch. They're extremely lightweight, which is often considered the killer feature of Git.
+
+In substantial, collaborative projects, the very first thing I do when starting to change the code is `git checkout -b`. We'll learn about this next time, but there are big advantages to never working directly on master if you're collaborating.
+
+clean:
+fix math on topic branch (x * x)
+add to paper on master
+merge
+
+pro git 3.16-3.17: the basic three-way merge
+
+** Done!
+git branch -d fix_math
+
+git log --oneline --graph
+
+* Working through a clean rebase
+
+** Let's try again
+git reset --hard [hash]
+
+rebasy:
+fix math on topic branch
+fix math on topic branch (x * x)
+add to paper on master
+
+* Working through a merge conflict
+
+merge conflicty:
+fix math on topic branch (x * x)
+add to paper on master, but also simplify x(x + 1)
+
+attempt "git merge fix_math" - get merge conflict
+git merge --abort
+
+Have them attempt "git merge fix_math" - get merge conflict again
+have them go into the file with the conflict and fix the
