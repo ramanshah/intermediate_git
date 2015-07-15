@@ -1,0 +1,1 @@
+There are some smaller useful concepts in Git, like tagging and stashing, that I didn't cover at all for lack of time and because I don't see them having quite the conceptual barrier to entry that the staging area and the branching model have.
