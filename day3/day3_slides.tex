@@ -136,6 +136,64 @@ git branch -d foo
     \href{https://progit.org/}{https://progit.org/}}
 \end{frame}
 
+%% Hacking on a branch
+\begin{frame}[fragile]{Hacking on a branch}
+  A shortcut for:
+
+  \begin{gitCommand}
+git branch experiment
+git checkout experiment
+  \end{gitCommand}
+
+  is:
+
+  \begin{gitCommand}git checkout -b experiment\end{gitCommand}
+
+  After making some commits, you can throw away the experimental commits with:
+
+  \begin{gitCommand}
+git checkout master
+git branch -D experiment
+  \end{gitCommand}
+
+\end{frame}
+
+%% Scenario #1: clean merge
+\begin{frame}{Scenario \#1: clean merge}
+  In the push to complete a project, two things will happen concurrently:
+
+  \begin{itemize}
+    \item Debug an analysis code
+    \item Flesh out a manuscript
+  \end{itemize}
+\end{frame}
+
+%% Do work on two branches
+\begin{frame}[fragile]{Do work on two branches}
+
+  Create a branch for debugging the analysis code:
+
+  \begin{gitCommand}git checkout -b fix_math\end{gitCommand}
+
+  Fix the bug in \texttt{R/square.R} using R's \texttt{*} operator:
+
+  \begin{gitCommand}
+...
+git commit ...
+  \end{gitCommand}
+
+  Do the work to flesh out the manuscript on \texttt{master}:
+
+  \begin{gitCommand}git checkout master\end{gitCommand}
+
+  Explain in \texttt{paper/paper.tex} that $ x^2 = x \times x $.
+
+  \begin{gitCommand}
+...
+git commit ...
+  \end{gitCommand}
+\end{frame}
+
 \begin{frame}[fragile]{Branches are lightweight}
   \begin{gitCommand}
 cat .git/refs/heads/master
@@ -168,6 +226,7 @@ cat .git/refs/heads/fix_math
     \href{https://progit.org/}{https://progit.org/}}
 \end{frame}
 
+%% Merge our work
 \begin{frame}[fragile]{Merge our work}
   Merge the work \emph{from} \texttt{fix\_math} \emph{into} \texttt{master}, updating \texttt{master}:
 
@@ -188,6 +247,117 @@ git merge fix_math
 
   \begin{gitCommand}git branch\end{gitCommand}
 
+\end{frame}
+
+%% Scenario #2: merge conflict
+\begin{frame}[fragile]{Scenario \#2: merge conflict}
+  Let's pretend that merge never happened:
+
+  \begin{gitCommand}
+git checkout master
+git reset --hard HEAD~1
+  \end{gitCommand}
+
+  And say that on \texttt{master}, we fixed the math bug in a
+  different way using R's \texttt{**} operator:
+
+  \begin{gitCommand}
+...
+git commit ...
+  \end{gitCommand}
+
+  Then what?
+
+  \begin{gitCommand}git merge fix_math\end{gitCommand}
+\end{frame}
+
+%% Panic button
+\begin{frame}[fragile]{Panic button}
+  \begin{gitCommand}git merge --abort\end{gitCommand}
+\end{frame}
+
+%% Fixing a merge conflict
+\begin{frame}[fragile]{Fixing a merge conflict}
+  \begin{gitCommand}git merge fix_math\end{gitCommand}
+
+  Have a look in the file that didn't merge cleanly. Make it look the
+  way you want it to look. To tell Git that the file is ``fixed,'' you
+  stage it!
+
+  \begin{gitCommand}
+...
+git add R/square.R
+  \end{gitCommand}
+
+  Then commit as usual:
+
+  \begin{gitCommand}git commit ...\end{gitCommand}
+
+\end{frame}
+
+%% Fast-forward merges
+\begin{frame}{Fast-forward merges}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0318-tn.png}
+    \\ \texttt{git checkout master} followed by \texttt{git merge develop}
+    just moves a pointer!
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-18.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+\begin{frame}{Fast-forward merges}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0329-tn.png}
+    \\ Rebasing can turn a branched history into a linear history.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-29.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+%% Rewrite history: git rebase
+\begin{frame}{Rewrite history: git rebase}
+  \huge {
+  Never modify history that someone else has seen.
+  }
+\end{frame}
+
+%% Scenario #3: clean rebase
+\begin{frame}[fragile]{Scenario \#3: clean rebase}
+  We'll rewind to just before our merge in Scenario \#1: let's get rid
+  of that merge but also the conflicting commit that we'd introduced
+  on \texttt{master}:
+
+  \begin{gitCommand}git reset --hard HEAD~2\end{gitCommand}
+\end{frame}
+
+\begin{frame}[fragile]{Scenario \#3: clean rebase}
+  Replay the work \emph{from} \texttt{fix\_math} \emph{onto} the tip
+  of \texttt{master}, creating a similar (but
+  different) \texttt{fix\_math}:
+
+  \begin{gitCommand}
+git checkout fix_math
+git rebase master
+  \end{gitCommand}
+
+  Now the merge is a fast-forward!
+
+  \begin{gitCommand}
+git checkout master
+git merge fix_math
+git log --oneline --graph
+  \end{gitCommand}
+
+  Throw away your successfully merged branch:
+
+  \begin{gitCommand}git branch -d fix_math\end{gitCommand}
 \end{frame}
 
 \end{document}
