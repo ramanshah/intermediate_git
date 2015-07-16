@@ -1,57 +1,120 @@
 * Intro to the branch model
-pro git 3.2: graph of commits
+This is sort of my favorite class. It's often said that lightweight, local branching and merging is the "killer feature" of Git. It's only a little bit of an exaggeration to say that, in software collaboration, Git *is* branching.
 
-pro git 3.3-3.4: branches are just a pointer
+Note that we're still not working on GitHub - branches can be entirely local things to help you in your own work.
 
+** Commits point to commits
+pro git 3.2
+
+In discrete math, we'd say that the set of commits forms a directed graph.
+
+Remember, a commit points to a tree with a hash, which might point to other trees with hashes (if you have subdirectories), which eventually points to a bunch of blobs with hashes. A commit also points to a parent commit, unless it's the initial commit, which has no parent.
+
+** Branches point to commits
+pro git 3.3
+
+A branch in Git is really just a pointer to a commit, nothing more!
+
+** Branches can diverge
 pro git 3.9: branches can diverge
+
+ If you were maintaining two diverging "branches" of a project by hand, you'd probably need two copies of the entire project on your disk. And good luck putting in a change if it's supposed to apply to both of them.
+
+** Merging brings them back
+
+Show of hands - have you ever worked on something (like a senior thesis in undergrad) where you made changes, someone else like your adviser made changes, and you had two versions of the document to merge them by hand? It's a pain!
+
+The reason Git is so helpful is that it is able to intelligently auto-merge two branches, as long as the work is unambiguously non-conflicting. We're going to see how to do this today.
+
+pro git 3.21: Point out the merge commit, which has two parents.
+
+In fact, because there's an initial commit at the root of a Git repo, commits would form not just a directed graph but a tree, if it weren't for these merges.
+
+* Experimenting with branches
+** Back to the Day 2 repo
+Have students return to the project from Day 2 or download/decompress a snapshot of my project as of the end of Day 2.
+
+`git status` should be clean.
+
+** Your first branches
+Have students use `git branch` to monitor the branch status while doing some branch wrangling:
+
+git branch foo
+git checkout foo
+git checkout master
+git branch -d foo
+
+Have students volunteer answers to what each of these is doing.
+
+** git checkout moves HEAD
+pro git 3.5-3.6: `git checkout` switches which branch HEAD points to. Remember from Day 2 that it also takes the contents of the HEAD commit and replaces the working tree with them. In this case, we're just switching between two branches that point to the same commit, so no files are changing in the working tree. But they will if the two branches point to different things.
+
+** Hacking on a branch
+In the spirit of Day 2, it's nice to know how Git frees you to experiment and make mistakes by giving you the tools to reverse mistakes. Branches are absolutely ideal for risky experimentation.
+
+git branch experiment
+git checkout experiment
+
+or, in one line,
+
+git checkout -b experiment
+
+Make a horrible mess.
+
+git commit -a -m 'Experiment: Make a horrible mess.'
+
+git checkout master
+
+Delete an unmerged branch, losing the commits belonging to it:
+
+git branch -D experiment
+
+Note the capital D - git will remind you about this if you try and do the lower case d.
 
 * Working through a clean branch and merge
 
-We'll do two pieces of work in parallel in three different ways, like Groundhog Day.
+In the rest of the class, we'll do two pieces of work in parallel in three different ways, like Groundhog Day.
 
-** Last class's project
-Have students
+** Work on our paper
 
-** Creating a new branch
-create a branch
-git checkout -b fix_math
+git checkout master
 
-short for
-git branch fix_math
-git checkout fix_math
-
-git branch - monitor the state of the branches
-
-pro git 3.5-3.6: checkout switches which branch HEAD points to
-
-** Branches are lightweight
-cat .git/refs/heads/fix_math
-
-The entirety of a Git branch is 41 characters, a 40-character SHA-1 hash pointing to a commit and a newline. This is unlike other kinds of version control systems, where you might have to copy the entire codebase to make a branch. They're extremely lightweight, which is often considered the killer feature of Git.
-
-In substantial, collaborative projects, the very first thing I do when starting to change the code is `git checkout -b`. We'll learn about this next time, but there are big advantages to never working directly on master if you're collaborating.
+Add some language to the paper. Save. Commit.
 
 clean:
 fix math on topic branch (x * x)
 add to paper on master
-merge
 
-pro git 3.16-3.17: the basic three-way merge
+** Work on our code
 
-** Done!
-git branch -d fix_math
+git checkout fix_math
+
+Fix the math in square.R. Save. Commit.
+
+** Branches are lightweight
+cat .git/refs/heads/master
+cat .git/refs/heads/fix_math
+
+The entirety of a Git branch is 41 bytes in a file, a 40-character SHA-1 hash pointing to a commit and a newline. This is unlike other kinds of version control systems, where you might have to copy the entire codebase to make a branch. They're extremely lightweight, which is often considered the killer feature of Git.
+
+** Git plans a three-way merge
+pro git 3.16-3.17
+
+Git figures out the best common ancestor on its own and creates a "merge commit" from the three relevant snapshots.
+
+** Merge our work
+
+Merge the work from fix_math into master.
 
 git log --oneline --graph
 
-* Working through a clean rebase
+model that there's a caret notation that complements tilde notation and lets you go down different paths in terms of the parents of a merge commit:
 
-** Let's try again
-git reset --hard [hash]
+git log -1 --pretty=format:%H HEAD^1
+git log -1 --pretty=format:%H HEAD^2
+git log -1 --pretty=format:%H HEAD^2~1
 
-rebasy:
-fix math on topic branch
-fix math on topic branch (x * x)
-add to paper on master
+git branch -d fix_math
 
 * Working through a merge conflict
 
@@ -64,3 +127,30 @@ git merge --abort
 
 Have them attempt "git merge fix_math" - get merge conflict again
 have them go into the file with the conflict and fix the
+
+* Working through a clean rebase
+
+** The fast-forward merge
+Pro Git 3.18 - diagram of a history that permits fast-forward merges.
+
+One thing that makes git logs confusing is a ton of merge commits from real three-way merges. If you did work on a branch but nothing got done on master, the merge is trivial in that you can just "fast-forward" the pointer to the more futuristic point and call it a day. Then there is no merge commit.
+
+Especially when contributing to open-source communities, a commit is treated like a publication - instead of a faithful chronological history of your fits, starts, and merges you clean up the history to be semantically well-organized, with a great commit message. The major tool to make your on-the-record work look cleaner is the "rebase." Rebasing is a big and flexible tool that takes you well into advanced (not intermediate) Git, but I wanted to give you a first glimpse of it so you know it exists.
+
+Remember this is a question of the social standards of the people you work with: I worked at a company with twenty engineers, and we just merged our poorly conceived commits all over the place. We still did just fine.
+
+** Danger zone: git rebase
+
+It's also a dangerous tool, because like git reset and git commit --amend, it rewrites history. You can irreversibly damage your Git repo with git rebase.
+
+Restate the Golden Rule of Git.
+
+When in doubt, before rebasing, you can just make a copy of your entire repo to another directory in case everything goes horribly wrong. We'll skip that today because not too much is at stake.
+
+** Let's try a rebase
+git reset --hard HEAD~1
+
+rebasy:
+fix math on topic branch
+fix math on topic branch (x * x)
+add to paper on master

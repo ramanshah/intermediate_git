@@ -17,4 +17,177 @@
         {https://github.com/ramanshah/intermediate\_git}}
 \end{frame}
 
+%% Commits point to commits
+\begin{frame}{Commits point to commits}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0302-tn.png}
+    \\ Each commit (but the first) has a parent.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-2.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+%% Branches point to commits
+\begin{frame}{Branches point to commits}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0303-tn.png}
+    \\ A branch is just a pointer to a commit.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-3.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+%% Branches can diverge
+\begin{frame}{Branches can diverge}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0309-tn.png}
+    \\ Branches enable you to develop different versions of the product concurrently.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-9.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+%% Merging brings them back
+\begin{frame}{Merging brings them back}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0321-tn.png}
+    \\ Because of merging, you can work on different aspects of a final desired product concurrently.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-21.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+%% Back to the Day 2 repo
+\begin{frame}[fragile]{Back to the Day 2 repo}
+  Do you have a clean sample repository from last time?
+
+  \begin{gitCommand}
+cd sample
+git status
+  \end{gitCommand}
+
+  If not, either clone the course repo or refresh it with
+  \texttt{git pull origin master}:
+
+  \begin{gitCommand}
+git clone https://github.com/\
+ramanshah/intermediate_git.git
+  \end{gitCommand}
+
+  Then decompress an updated sample repository:
+
+  \begin{gitCommand}
+cp ./intermediate_git/day3/sample.tgz .
+tar xzvf sample.tgz
+cd sample
+git status
+  \end{gitCommand}
+\end{frame}
+
+%% Your first branches
+\begin{frame}[fragile]{Your first branches}
+
+  Between each of the following, monitor with:
+
+  \begin{gitCommand}git branch\end{gitCommand}
+
+  \begin{gitCommand}
+git branch foo
+git checkout foo
+git checkout master
+git branch -d foo
+  \end{gitCommand}
+\end{frame}
+
+%% git checkout moves HEAD
+\begin{frame}{\texttt{git checkout} moves \texttt{HEAD}}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0305-tn.png}
+    \\ \texttt{git checkout master}
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-5.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+\begin{frame}{\texttt{git checkout} moves \texttt{HEAD}}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0306-tn.png}
+    \\ \texttt{git checkout testing}
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-6.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+\begin{frame}[fragile]{Branches are lightweight}
+  \begin{gitCommand}
+cat .git/refs/heads/master
+cat .git/refs/heads/fix_math
+  \end{gitCommand}
+\end{frame}
+
+%% Git plans a three-way merge
+\begin{frame}{Git plans a three-way merge}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0316-tn.png}
+    \\ Git figures out the best common ancestor on its own\ldots
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-16.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+\begin{frame}{Git plans a three-way merge}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0317-tn.png}
+    \\ \ldots and creates a ``merge commit'' from the three relevant snapshots.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-17.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+\begin{frame}[fragile]{Merge our work}
+  Merge the work \emph{from} \texttt{fix\_math} \emph{into} \texttt{master}, updating \texttt{master}:
+
+  \begin{gitCommand}
+git checkout master
+git merge fix_math
+  \end{gitCommand}
+
+  Behold your successful merge!
+
+  \begin{gitCommand}git log --oneline --graph\end{gitCommand}
+
+  Throw away your successfully merged branch:
+
+  \begin{gitCommand}git branch -d fix_math\end{gitCommand}
+
+  And it's gone:
+
+  \begin{gitCommand}git branch\end{gitCommand}
+
+\end{frame}
+
 \end{document}
