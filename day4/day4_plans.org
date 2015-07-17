@@ -1,1 +1,10 @@
-There are some smaller useful concepts in Git, like tagging and stashing, that I didn't cover at all for lack of time and because I don't see them having quite the conceptual barrier to entry that the staging area and the branching model have.
+** Conclusion
+Drawing of lid with magic script on it.
+
+We moved quickly in this course, and at times it may have felt like we were banging through magic spells at a reckless speed. My hope was to teach you enough about the concepts of Git that you'll have the background understanding and language needed to search for the exact magic spells you need when they become necessary in practice. There are some smaller useful concepts in Git, like tagging and stashing, that I didn't cover at all for lack of time and because I don't see them having quite the conceptual barrier to entry that the staging area and the branching model have. So keep learning!
+
+Also, feel free to look at these slides and lecture plans on the web as a reference, in addition to the abundant other material online (in blogs and on StackOverflow) and in books.
+
+Hopefully, many of you now feel better about Git on two fronts: first, that it's a system you can use in your personal research that makes the work of building software and publications safer, not more dangerous; and second, that it's within your reach to prepare a pull request to a dynamic, multi-developer project, where your work could reach a bigger audience and where your software skills could grow a lot.
+
+Pass out evaluation forms.
