@@ -1,0 +1,126 @@
+\input{../preamble}
+
+\title{Intermediate Git}
+\subtitle{Day 4: Collaborating on GitHub}
+\author{Raman A.~Shah}
+\date{}
+
+\begin{document}
+
+%% Title
+\begin{frame}[plain]
+  \titlepage
+  \footnotesize{Copyright (c) 2015 by Raman A.~Shah.\\
+  \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}
+       {Creative Commons BY-NC-SA 3.0 Unported}.\\
+   \href{https://github.com/ramanshah/intermediate\_git}
+        {https://github.com/ramanshah/intermediate\_git}}
+\end{frame}
+
+%% Everyone's on master
+\begin{frame}{Everyone's on master}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0322-tn.png}
+    \\ A standard \texttt{git clone}.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-22.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+\begin{frame}{Everyone's on master}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0323-tn.png}
+    \\ Local \texttt{master} has diverged from \texttt{origin/master}.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-23.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+\begin{frame}{Everyone's on master}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0324-tn.png}
+    \\ You have to \texttt{git fetch}, not \texttt{git pull}.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-24.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+\begin{frame}{Everyone's on master}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0325-tn.png}
+    \\ You can add a second remote.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-25.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+\begin{frame}{Everyone's on master}
+  \begin{figure}
+    \includegraphics[scale=0.8]{18333fig0326-tn.png}
+    \\ Again, \texttt{git fetch}, not \texttt{git pull}, is appropriate.
+  \end{figure}
+  \footnotesize{Scott Chacon,
+    \emph{Pro Git},
+    Fig.~3-26.
+    \href{https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode}{CC-BY-NC-SA}.
+    \href{https://progit.org/}{https://progit.org/}}
+\end{frame}
+
+%% Recommendation
+\begin{frame}{Recommendation}
+  \huge {
+  When collaborating, don't work on \texttt{master}; if you do,
+  avoid \texttt{git pull}.
+}
+\end{frame}
+
+%% Pull requests with push access
+\begin{frame}{Pull requests---can push}
+  Why wouldn't you just push to master?
+
+  \begin{itemize}
+    \item Pull requests give a mechanism for peer review of code.
+    \item Others might expect \texttt{master} to be working or stable.
+    \item The \texttt{master} branch might need to be ready to
+          go, \emph{e.g.}, deployable.
+  \end{itemize}
+
+  Even if you have push access, submit changes as pull requests as a
+  matter of \emph{safety} and \emph{etiquette}.
+\end{frame}
+
+%% Pull requests with
+\begin{frame}{Pull requests---can't push}
+  If you don't have push access, you have to:
+
+  \begin{itemize}
+    \item \emph{Fork} the repo on GitHub.
+    \item Curate your fork so that the changes in the fork can be
+          applied to the original repo in a single click.
+    \item In some projects, rebase your work so that the commits are
+          comprehensive and result in a fast-forward merge.
+  \end{itemize}
+
+  This is the default case in open source work.
+\end{frame}
+
+%% Conclusion
+\begin{frame}{Conclusion}
+  \begin{figure}
+    \includegraphics[scale=0.82]{magic_lid.jpg}
+  \end{figure}
+\end{frame}
+
+\end{document}

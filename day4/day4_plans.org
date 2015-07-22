@@ -1,3 +1,70 @@
+* Introduction
+
+The basic unit of collaborating on a product with others using Git is the pull request. Hopefully, having learned something about branching and merging, you'll be able to use and understand pull requests at a deeper level than a superficial black magic way. We're going to learn how to do this today, and in the process, maybe clear up some of the issues that often happen even when you're working solo on a repository from multiple computers.
+
+Today's material, unfortunately, requires a lot of mocking up to demo and a lot of tech support issues that can come up in interacting with GitHub following along. So instead, for the most part, I'm just going to give a shorter lecture and have a session at the end where you do some pull requests of your own.
+
+* Basic branch wrangling
+
+** Remote branches
+
+[remote]/[branch]
+
+You can't control what these branches point to. You can't move them locally by committing new work onto them. They automatically update when network communication occurs.
+
+** Tracking branches
+
+However, you can tell Git
+
+When you "git clone" a project, it automatically sets up your local branch master to track 'origin/master', which makes makes `git push` and `git pull` work without arguments.
+
+** pull = fetch + merge
+
+* When multiple things happen on master
+
+** Everyone's on master
+*** A standard `git clone`.
+Note how just cloning automatically sets up your branch `master` and set it to track `origin/master`.
+
+*** Local `master` has diverged from `origin/master`.
+So now we're in trouble: what GitHub thinks is master is different from what your local computer thinks is master. Remote branches make it so that you can still deal with this instead of just blowing up in an inevitable and confusing merge conflict. The key point is that pull = fetch + merge, and we don't want to be forced to merge just to look at the material!
+
+Look also how `origin/master` is stale - it points to what `master` used to be on the last network communication.
+
+*** You have to `git fetch`, not `git pull`.
+When you git fetch, note that the `origin/master` pointer gets moved - not only that, but the Git commits that `origin/master` points to are downloaded.
+
+*** You can add a second remote.
+You might think this is academic - but as we'll see, managing two remotes is exactly what you do when you fork a repository in order to contribute to it.
+
+*** Again, `git fetch`, not `git pull`, is appropriate.
+In this case, the new remote points
+
+** Recommendation
+When collaborating, don't work on master, or if you do, don't use git pull.
+
+Some drawbacks to the origin/master stuff: If you don't freshly `git fetch`, these remote branches easily go stale. Thinking about the the state of `master` and multiple `x/master` branches is something I find hard.
+
+If, in collaboration, you just always work on a branch and add your help via pull requests, your conceptual model is a lot simpler. The only thing you use `master` for is as a local copy of the state of `origin/master`. I recommend this!
+
+Other people work on master but never use the `git pull` command and instead `git fetch` with manual merging. The goal is the same - to prevent updating your repos from getting mixed up with merge conflicts.
+
+* Pull requests when you have push access
+** Pull requests - can push
+I'm going to give you a blow by blow of a reasonable workflow of two kinds of collaboration: where the maintainer of the GitHub repository gives you push access, and where they don't. We're going to ignore rebasing to clean up history and just assume that merge commits and a messy history are okay.
+
+When you can push, you could just push to master. There's no technical guardrail stopping you from doing this. Not doing this is a matter of safety and etiquette.
+
+* Pull requests when you don't have push access
+** Pull requests - can't push
+When you can't push, the barrier to entry is higher. This is the really juicy case and the one you're going to do yourself at the end of class. It's also the canonical case in that you have a repo, and you're requesting a maintainer to pull stuff from your repo into their repo. The mechanics of keeping the repos in sync can be a little intricate.
+
+Why wouldn't people just offer push access? Well, suppose you spent your entire Ph.D. on a data analysis tool that you've published on GitHub. That thing is your baby, but you'd be fine with others making it better, as long as you have a final word on contributions. Would you really want somebody you don't know or barely know changing master at will, so that you have to go and dig out your old work by checking out old commits? What if they rewrote history with a bad rebase? What if they're malicious?
+
+In open source, your first pull request to a project is sort of an audition. My goal in getting to this point in this class is so that the barrier to entry for you having public-facing contributions on important projects on GitHub is not Git but instead your programming and subject matter expertise. I want to help you pass your first audition!
+
+* Conclusion and activity
+
 ** Conclusion
 Drawing of lid with magic script on it.
 
@@ -7,4 +74,5 @@ Also, feel free to look at these slides and lecture plans on the web as a refere
 
 Hopefully, many of you now feel better about Git on two fronts: first, that it's a system you can use in your personal research that makes the work of building software and publications safer, not more dangerous; and second, that it's within your reach to prepare a pull request to a dynamic, multi-developer project, where your work could reach a bigger audience and where your software skills could grow a lot.
 
-Pass out evaluation forms.
+** Activity (target duration: 20 min)
+Hand out activity instructions. Pair off students and explain the goal of the activity. Time permitting, do the activity twice so that each student gets to try making a pull request and accepting a pull request.
