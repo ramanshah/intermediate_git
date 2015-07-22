@@ -37,7 +37,8 @@
 ** SWBAT create and assign a pull request to a repo where they have push access
 ** SWBAT review a collaborator's pull request and explain the meaning of 'LGTM'
 ** SWBAT explain why it can be confusing to work on master
-** SWBAT refer to remote tracking branches with `<remote>/<branch>` notation
+** SWBAT refer to remote branches with `<remote>/<branch>` notation
+** SWBAT set up a tracking branch to track an existing remote branch
 ** SWBAT use `git fetch` to fetch someone else's branch without merging
 ** SWBAT fork a collaborator's repo and create a pull request where they don't have push access
 ** SWBAT update their fork of the read-only repo from the command line
