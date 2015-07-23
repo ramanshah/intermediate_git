@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage[margin=1 in]{geometry}
+\usepackage{parcolumns}
+\newcommand{\personA}[1]{\colchunk{\begin{description}\item[A:~~]{#1}%
+    \end{description}}}
+\newcommand{\personB}[1]{\colchunk{\begin{description}\item[B:~~]{#1}%
+    \end{description}}\colplacechunks}
+
+\begin{document}
+
+\centerline{\LARGE A Fork-Based Pull Request}
+
+\qquad
+
+\begin{parcolumns}[colwidths={1=3.2 in, 2=3.2 in},nofirstindent]{2}
+%
+  \personA{\emph{If not done already:}
+    \\ Create an empty repository on GitHub.
+    \\ Name it \texttt{sample\_[your name]}.
+    \\ Connect your \texttt{sample} repo to it:
+    \\ \texttt{git remote add origin [your\_repo\_url]}
+    \\ Put your work on GitHub:
+    \\ \texttt{git push origin master}}
+  \personB{Relax.}
+%
+  \personA{Relax.}
+  \personB{Clone their repository on GitHub:
+    \\ \texttt{git clone [their\_repo\_url]}
+    \\ Navigate to their GitHub repo page, and fork their repo
+       by clicking ``Fork.''
+    \\ Connect your local clone to your fork:
+    \\ \texttt{git remote add my\_fork [your\_fork\_url]}}
+%
+  \personA{Working on master
+   \\ (\texttt{git checkout master}):
+   \\ Add a comment to the code in \texttt{R/square.R} that does the calculation.
+   \\ Commit the work:
+   \\ \texttt{git commit -a -m '\ldots'}
+   \\ Push the work to GitHub:
+   \\ \texttt{git push origin master}}
+  \personB{Working on a separate branch
+   \\ (\texttt{git checkout -b my\_branch}):
+   \\ Add your name to the copyright notice in
+   \\ \texttt{README.md}.
+   \\ Commit the work:
+   \\ \texttt{git commit -a -m '\ldots'}
+   \\ Push the work to GitHub:
+   \\ \texttt{git push my\_fork my\_branch}}
+%
+  \personA{Relax.}
+  \personB{Grab their work:
+   \\ \texttt{git checkout master}
+   \\ \texttt{git pull origin master}
+   \\ Add their work to your fork:
+   \\ \texttt{git push my\_fork master}
+   \\ Merge their work into your branch:
+   \\ \texttt{git checkout my\_branch}
+   \\ \texttt{git merge master}
+   \\ Add your merge to your fork:
+   \\ \texttt{git push my\_fork my\_branch}
+   \\ Go to the GitHub page for your fork. Find your branch \texttt{my\_branch}.
+      Click on ``New Pull Request.''
+   \\ Send them a message on the pull request page---you can tag them with
+      \texttt{@[username]} and explain the work you've done.
+      ``Assign'' them to review the pull request.}
+%
+  \personA{Go to your GitHub page.
+    Find their pull request.
+    Read their commentary and look at their code changes.
+    Click on the line where they changed the copyright.
+    Complain about it some\-how---maybe that something should or should not be
+    abbreviated.}
+  \personB{Relax.}
+%
+  \personA{Relax.}
+  \personB{Go to your pull request.
+   Read their commentary.
+   \\ Go to your branch:
+   \\ \texttt{git checkout my\_branch}
+   \\ Fix the copyright in \texttt{README.md} to comply with their request.
+   \\ Commit your work:
+   \\ \texttt{git commit -a -m '\ldots'}
+   \\ Push the work to your fork:
+   \\ \texttt{git push my\_fork my\_branch}}
+%
+  \personA{Now you're happy. Click ``Merge Pull Request'' and confirm.
+    Click ``Delete Branch.''}
+  \personB{Relax.}
+%
+  \personA{Update your local version of the codebase:
+   \\ \texttt{git pull origin master}}
+  \personB{Get the successfully merged version:
+   \\ \texttt{git checkout master}
+   \\ \texttt{git pull origin master}
+   \\ Update your fork:
+   \\ \texttt{git push my\_fork master}
+   \\ Delete your local branch:
+   \\ \texttt{git branch -d my\_branch}
+   \\ Delete your branch on your fork:
+   \\ \texttt{git push my\_fork :my\_branch}}
+%
+\end{parcolumns}
+\end{document}
