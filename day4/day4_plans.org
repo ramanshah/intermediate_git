@@ -2,7 +2,7 @@
 
 The basic unit of collaborating on a product with others using Git is the pull request. Hopefully, having learned something about branching and merging, you'll be able to use and understand pull requests at a deeper level than a superficial black magic way. We're going to learn how to do this today, and in the process, maybe clear up some of the issues that often happen even when you're working solo on a repository from multiple computers.
 
-Today's material, unfortunately, requires a lot of mocking up to demo and a lot of tech support issues that can come up in interacting with GitHub following along. So instead, for the most part, I'm just going to give a shorter lecture and have a session at the end where you do some pull requests of your own.
+Today's material, unfortunately, requires a lot of mocking up to demo and a lot of tech support issues that can come up in interacting with GitHub if you were following along. So instead, for the most part, I'm just going to give a shorter lecture and have a session at the end where you do some pull requests of your own.
 
 * Basic branch wrangling
 
@@ -16,9 +16,12 @@ You can't control what these branches point to. You can't move them locally by c
 
 However, you can tell Git
 
-When you "git clone" a project, it automatically sets up your local branch master to track 'origin/master', which makes makes `git push` and `git pull` work without arguments.
+When you `git clone` a project, it automatically sets up your local branch master to track 'origin/master', which makes makes `git push` and `git pull` work without arguments.
 
-** pull = fetch + merge
+Also, when you `git push` a new branch to a remote, it also sets up a tracking branch.
+
+** Pushing and pulling
+pull = fetch + merge
 
 * When multiple things happen on master
 
@@ -51,9 +54,16 @@ Other people work on master but never use the `git pull` command and instead `gi
 
 * Pull requests when you have push access
 ** Pull requests - can push
-I'm going to give you a blow by blow of a reasonable workflow of two kinds of collaboration: where the maintainer of the GitHub repository gives you push access, and where they don't. We're going to ignore rebasing to clean up history and just assume that merge commits and a messy history are okay.
+I'm going to give you a blow by blow of a reasonable workflow (my workflow, not necessarily the best and certainly not the only one) of two kinds of collaboration: where the maintainer of the GitHub repository gives you push access, and where they don't. We're going to ignore rebasing to clean up history and just assume that merge commits and a messy history are okay.
 
 When you can push, you could just push to master. There's no technical guardrail stopping you from doing this. Not doing this is a matter of safety and etiquette.
+
+** 14-slide flip book
+Narrate the slides.
+
+Note how the day is messed up when it turns out that someone put new work on master.
+
+Show how keeping master clean allows you to do housekeeping with a few git commands. If you work on master, you'll need to fetch and be careful about keeping a mental state of the remote masters.
 
 * Pull requests when you don't have push access
 ** Pull requests - can't push
@@ -62,6 +72,18 @@ When you can't push, the barrier to entry is higher. This is the really juicy ca
 Why wouldn't people just offer push access? Well, suppose you spent your entire Ph.D. on a data analysis tool that you've published on GitHub. That thing is your baby, but you'd be fine with others making it better, as long as you have a final word on contributions. Would you really want somebody you don't know or barely know changing master at will, so that you have to go and dig out your old work by checking out old commits? What if they rewrote history with a bad rebase? What if they're malicious?
 
 In open source, your first pull request to a project is sort of an audition. My goal in getting to this point in this class is so that the barrier to entry for you having public-facing contributions on important projects on GitHub is not Git but instead your programming and subject matter expertise. I want to help you pass your first audition!
+
+** 18-slide flip book
+Narrate the slides.
+
+Note how keeping master as just a (possibly stale) copy of origin/master is even more beneificial now that there are two remotes to manage.
+
+Show how you can delete a remote branch with `git push my_fork :my_branch`. This is a weird notation, but it's how you delete a branch on a remote. The idea is this: the long hand is git push my_fork local_branch_name:remote_branch_name. What you're telling git is "Take nothing on my side and make it be remote_branch_name on the server."
+
+** Keep pull requests small!
+Huge pull requests involve so much incompletely merged development time that the merge conflicts can be horrendous. And at the same time, there's so much changed code that neither the author
+
+I've personally seen over a month of productivity completely flushed by a colleague because of a grossly oversized pull request. That's a totally miserable month of endless comment threads and gnarly merge conflicts. Keep pull requests small! Plan a big task as a sequence of refactorings so the final amount of code needed to implement the feature is minimal. If you have to, negotiate to stub out parts of a big change so that you can return the product to a consistent state without fully implementing the feature.
 
 * Conclusion and activity
 

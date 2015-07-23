@@ -17,6 +17,33 @@
         {https://github.com/ramanshah/intermediate\_git}}
 \end{frame}
 
+%% Back to the Day 2 repo
+\begin{frame}[fragile]{Back to the Day 2 repo}
+  Do you have a clean sample repository from last time?
+
+  \begin{gitCommand}
+cd sample
+git status
+  \end{gitCommand}
+
+  If not, either clone the course repo or refresh it with
+  \texttt{git pull origin master}:
+
+  \begin{gitCommand}
+git clone https://github.com/\
+ramanshah/intermediate_git.git
+  \end{gitCommand}
+
+  Then decompress an updated sample repository:
+
+  \begin{gitCommand}
+cp ./intermediate_git/day4/sample.tgz .
+tar xzvf sample.tgz
+cd sample
+git status
+  \end{gitCommand}
+\end{frame}
+
 %% Everyone's on master
 \begin{frame}{Everyone's on master}
   \begin{figure}
@@ -86,9 +113,9 @@
 }
 \end{frame}
 
-%% Pull requests with push access
+%% Pull requests - can push
 \begin{frame}{Pull requests---can push}
-  Why wouldn't you just push to master?
+  Why wouldn't you just push to \texttt{master}?
 
   \begin{itemize}
     \item Pull requests give a mechanism for peer review of code.
@@ -101,19 +128,297 @@
   matter of \emph{safety} and \emph{etiquette}.
 \end{frame}
 
-%% Pull requests with
+%% Pull requests with push access flipbook
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_001.pdf}
+    \\ Someone has a project.
+    \\ They give you push access.
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_002.pdf}
+    \\ \texttt{git clone [url]}
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_003.pdf}
+    \\ \texttt{git checkout -b my\_branch}
+    \\ \texttt{git commit [...]}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_004.pdf}
+    \\ \texttt{git push origin my\_branch}
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_005.pdf}
+    \\ They put some new work on \texttt{master}.
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_006.pdf}
+    \\ \texttt{git checkout master}
+    \\ \texttt{git pull origin master}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_007.pdf}
+    \\ \texttt{git checkout my\_branch}
+    \\ \texttt{git merge master}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_008.pdf}
+    \\ \texttt{git push origin my\_branch}
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_009.pdf}
+    \\ Click ``New Pull Request;'' code review
+    \\ \texttt{git commit [...]}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_010.pdf}
+    \\ \texttt{git push origin my\_branch}
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_011.pdf}
+    \\ ``LGTM''---``Looks Good To Me.''
+    \\ You click ``Merge Pull Request.''
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_012.pdf}
+    \\ You click ``Delete Branch.''
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_013.pdf}
+    \\ \texttt{git checkout master}
+    \\ \texttt{git pull origin master}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can push}
+  \begin{figure}
+    \includegraphics{push_014.pdf}
+    \\ \texttt{git branch -d my\_branch}
+    \\ Done!
+  \end{figure}
+\end{frame}
+
+%% Pull requests - can't push
 \begin{frame}{Pull requests---can't push}
   If you don't have push access, you have to:
 
   \begin{itemize}
     \item \emph{Fork} the repo on GitHub.
     \item Curate your fork so that the changes in the fork can be
-          applied to the original repo in a single click.
+          applied to the original repo in a single pull without
+          merge conflicts.
     \item In some projects, rebase your work so that the commits are
-          comprehensive and result in a fast-forward merge.
+          ``nice'' and result in a fast-forward merge.
   \end{itemize}
 
   This is the default case in open source work.
+\end{frame}
+
+%% Pull requests without push access flipbook
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_001.pdf}
+    \\ Someone has a project.
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_002.pdf}
+    \\ \texttt{git clone [url]}
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_003.pdf}
+    \\ Click ``Fork'' on GitHub
+    \\ \texttt{git remote add my\_fork [url]}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_004.pdf}
+    \\ \texttt{git checkout -b my\_branch}
+    \\ \texttt{git commit [...]}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_005.pdf}
+    \\ \texttt{git push my\_fork my\_branch}
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_006.pdf}
+    \\ They put some new work on \texttt{master}.
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_007.pdf}
+    \\ \texttt{git checkout master}
+    \\ \texttt{git pull origin master}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_008.pdf}
+    \\ \texttt{git push my\_fork master}
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_009.pdf}
+    \\ \texttt{git checkout my\_branch}
+    \\ \texttt{git merge master}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_010.pdf}
+    \\ \texttt{git push my\_fork my\_branch}
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_011.pdf}
+    \\ Click ``New Pull Request;'' code review
+    \\ \texttt{git commit [...]}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_012.pdf}
+    \\ \texttt{git push my\_fork my\_branch}
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_013.pdf}
+    \\ They're happy. They click ``Merge Pull Request.''
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_014.pdf}
+    \\ They click ``Delete Branch.''
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_015.pdf}
+    \\ \texttt{git checkout master}
+    \\ \texttt{git pull origin master}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_016.pdf}
+    \\ \texttt{git push my\_fork master}
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_017.pdf}
+    \\ \texttt{git branch -d my\_branch}
+    \\ \texttt{}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Pull requests---can't push}
+  \begin{figure}
+    \includegraphics{fork_018.pdf}
+    \\ \texttt{git push my\_fork :my\_branch}
+    \\ Done!
+  \end{figure}
+\end{frame}
+
+%% Keep pull requests small!
+\begin{frame}{Keep pull requests small!}
+  Shorter pull requests involve:
+
+  \begin{itemize}
+    \item Less \emph{time} to diverge from \texttt{master}---hence
+          fewer merge conflicts
+    \item Less \emph{cognitive load} for the developer and maintainer
+          to comprehend and communicate the reasoning behind the
+          changes
+  \end{itemize}
+
+  My personal rule of thumb is that a pull request is too big if you exceed:
+
+  \begin{itemize}
+    \item Roughly one week of active development time
+    \item Roughly 150 lines of source code
+  \end{itemize}
 \end{frame}
 
 %% Conclusion
