@@ -44,6 +44,71 @@ git status
   \end{gitCommand}
 \end{frame}
 
+%% Manage GitHub: git remote
+\begin{frame}[fragile]{Manage GitHub: git remote}
+  Try these on your \texttt{intermediate\_git} and \texttt{sample} repos.
+  What do you get?
+
+  \begin{gitCommand}
+git remote
+git remote -v
+git remote show origin
+  \end{gitCommand}
+
+  To connect your repository to a server:
+
+  \begin{gitCommand}git remote add [remote_name] [url]\end{gitCommand}
+
+  To delete the connection:
+
+  \begin{gitCommand}git remote rm [remote_name]\end{gitCommand}
+\end{frame}
+
+%% Remote branches
+\begin{frame}[fragile]{Remote branches}
+  \begin{gitCommand}[remote]/[branch]\end{gitCommand}
+
+  A read-only pointer to the state of \texttt{[branch]} on \texttt{[remote]}
+  the last time you checked.
+\end{frame}
+
+%% Tracking branches
+\begin{frame}[fragile]{Tracking branches}
+  A local branch is sometimes automatically set up to correspond to a remote
+  branch:
+
+  \begin{itemize}
+    \item When you \texttt{git clone} a repo, \texttt{master} tracks
+    \texttt{origin/master}.
+
+    \item When you \texttt{git push} a new branch, that gets set up to track
+    as well.
+  \end{itemize}
+
+  But to check out someone else's branch from a remote, you have to set up tracking
+  yourself:
+
+  \begin{gitCommand}git checkout -b [branch] \
+  [remote]/[branch]\end{gitCommand}
+\end{frame}
+
+%% Push, fetch, and pull
+\begin{frame}[fragile]{Push, fetch, and pull}
+  To put local commits on the remote server:
+
+  \begin{gitCommand}git push [remote] [branch]\end{gitCommand}
+
+  To download remote objects:
+
+  \begin{gitCommand}git fetch [remote]\end{gitCommand}
+
+  To download remote objects \emph{and} merge them into your current branch:
+
+  \begin{gitCommand}git pull [remote] [branch]\end{gitCommand}
+
+  \texttt{git pull} = \texttt{git fetch} + \texttt{git merge}!
+\end{frame}
+
 %% Everyone's on master
 \begin{frame}{Everyone's on master}
   \begin{figure}
@@ -108,8 +173,9 @@ git status
 %% Recommendation
 \begin{frame}{Recommendation}
   \huge {
-  When collaborating, don't work on \texttt{master}; if you do,
-  avoid \texttt{git pull}.
+  When collaborating, don't work on \texttt{master}.
+  \\
+  If you do, avoid \texttt{git pull}.
 }
 \end{frame}
 

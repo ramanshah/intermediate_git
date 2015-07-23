@@ -6,22 +6,63 @@ Today's material, unfortunately, requires a lot of mocking up to demo and a lot 
 
 * Basic branch wrangling
 
+** Back to the Day 2 repo
+Have students get to a clean state of their sample repos.
+
+** Manage GitHub: git remote
+Have them try each of the git remote commands on this repo and on their sample repo.
+
+git remote
+git remote -v
+git remote show origin
+
+Note how origin is a "default" remote that gets set up when you clone.
+Ask them what each said on each repo. What does this mean about the sample repo?
+
+Hooking up and unhooking up remotes. You can have many remotes!
+
+Take a minute to set up my sample to my GitHub - warn them that there are tech issues that can makes this tricky. Show of hands - how many people did this work for? Reassure that they won't need it for the rest of the lecture and can get back to it at the activity at the end.
+
+git remote add [remote_name] [url]
+git remote rm [remote_name]
+
 ** Remote branches
 
 [remote]/[branch]
 
-You can't control what these branches point to. You can't move them locally by committing new work onto them. They automatically update when network communication occurs.
+You can't control what these branches point to. You can't move them locally by committing new work onto them, but you can check them out and look at them. They automatically update when network communication occurs.
+
+I don't use them much, but I want you to be aware of them: as we'll see in a minute, they're very important, especially if multiple people have worked on master.
 
 ** Tracking branches
 
-However, you can tell Git
+However, you can tell Git to have a local branch that represents a remote branch. This is called a tracking branch.
 
-When you `git clone` a project, it automatically sets up your local branch master to track 'origin/master', which makes makes `git push` and `git pull` work without arguments.
+To work on an existing branch `randombranch` on `origin`:
 
-Also, when you `git push` a new branch to a remote, it also sets up a tracking branch.
+git checkout -b randombranch origin/randombranch
+git checkout --track origin/randombranch
 
-** Pushing and pulling
+When you `git clone` a project, it automatically sets up your local branch `master` to track 'origin/master', which makes makes `git push` and `git pull` work without arguments. (I don't use git pull and git push without arguments personally: I find that being explicit about which branch and remote I'm working on is helpful for preventing a certain class of Git mistakes when you were on the wrong branch.)
+
+Also, when you `git push` a new branch to a remote that the remote hasn't seen, it also sets up a tracking branch automatically.
+
+But when you want to fetch and look at a branch you didn't create yourself that's on a remote, this is what you have to do. I'm not sure how much time I've lost having forgotten this syntax and looking up how to do it again. It's happened quite a few times!
+
+** Pull, fetch, and pull
+
+git pull = git fetch + git merge
+
+push adds your new objects to the remote and fails if it can't do it.
+
+pull is trickier and one of the bigger landmines of Git:
 pull = fetch + merge
+
+fetch adds the remote's objects to your local repo.
+
+pull does more: it also merges the remote branch into your local branch. This is no problem if you're working alone and always from one computer, since you'll always have a nice fast-forward merge.
+
+But even if you push from two different machines, you'll eventually miscoordinate your GitHub management, and this becomes important! As a result of this, many people just don't use pull at all. As I'll explain more later, I use pull, but to make it safe, I never work on master if there are collaborators.
 
 * When multiple things happen on master
 
@@ -61,7 +102,7 @@ When you can push, you could just push to master. There's no technical guardrail
 ** 14-slide flip book
 Narrate the slides.
 
-Note how the day is messed up when it turns out that someone put new work on master.
+Note how the day is messed up when it turns out that origin/master changed. This is not just me being pedantic - on a GitHub repo of any scale, it is *usually* the case that master changes in the amount of time it takes you to prepare a pull request.
 
 Show how keeping master clean allows you to do housekeeping with a few git commands. If you work on master, you'll need to fetch and be careful about keeping a mental state of the remote masters.
 
@@ -76,14 +117,14 @@ In open source, your first pull request to a project is sort of an audition. My 
 ** 18-slide flip book
 Narrate the slides.
 
-Note how keeping master as just a (possibly stale) copy of origin/master is even more beneificial now that there are two remotes to manage.
+Note how keeping master as just a (possibly stale) copy of origin/master is even more beneificial now that there are two remotes to keep in your head.
 
 Show how you can delete a remote branch with `git push my_fork :my_branch`. This is a weird notation, but it's how you delete a branch on a remote. The idea is this: the long hand is git push my_fork local_branch_name:remote_branch_name. What you're telling git is "Take nothing on my side and make it be remote_branch_name on the server."
 
 ** Keep pull requests small!
 Huge pull requests involve so much incompletely merged development time that the merge conflicts can be horrendous. And at the same time, there's so much changed code that neither the author
 
-I've personally seen over a month of productivity completely flushed by a colleague because of a grossly oversized pull request. That's a totally miserable month of endless comment threads and gnarly merge conflicts. Keep pull requests small! Plan a big task as a sequence of refactorings so the final amount of code needed to implement the feature is minimal. If you have to, negotiate to stub out parts of a big change so that you can return the product to a consistent state without fully implementing the feature.
+I've personally seen over a month of productivity completely flushed by a colleague because of a grossly oversized pull request -- something like 2-3 months of complicated data science software R&D work that took 3-4 months to finally be merged. That's a totally miserable month of endless comment threads and gnarly merge conflicts. Keep pull requests small! Plan a big task as a sequence of refactorings or library functionality so the final amount of code needed to implement the feature is minimal. If you have to, negotiate to stub out parts of a big change so that you can return the product to a consistent state without fully implementing the feature.
 
 * Conclusion and activity
 
@@ -97,4 +138,4 @@ Also, feel free to look at these slides and lecture plans on the web as a refere
 Hopefully, many of you now feel better about Git on two fronts: first, that it's a system you can use in your personal research that makes the work of building software and publications safer, not more dangerous; and second, that it's within your reach to prepare a pull request to a dynamic, multi-developer project, where your work could reach a bigger audience and where your software skills could grow a lot.
 
 ** Activity (target duration: 20 min)
-Hand out activity instructions. Pair off students and explain the goal of the activity. Time permitting, do the activity twice so that each student gets to try making a pull request and accepting a pull request.
+Hand out activity instructions. Pair off students and explain the goal of the activity - to recapitulate the pull request where you don't have push access. Time permitting, do the activity twice so that each student gets to try making a pull request and accepting a pull request.
