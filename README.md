@@ -12,3 +12,11 @@ distribute and/or modify this document under the terms of the Creative
 Commons Attribution-NonCommerical-ShareAlike 3.0 Unported License,
 included in `LICENSE`. All rights reserved subject to the Creative
 Commons License.
+
+# Acknowledgment
+
+We gratefully acknowledge support for this work from the Gordon and
+Betty Moore Foundation via an
+[Investigator Award to Matthew Stephens, Grant GBMF4559]
+(https://www.moore.org/grants/list/GBMF4559), as part of the
+Data-Driven Discovery program.
