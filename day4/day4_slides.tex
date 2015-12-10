@@ -215,7 +215,7 @@ git remote show origin
   \begin{figure}
     \includegraphics{push_003.pdf}
     \\ \texttt{git checkout -b my\_branch}
-    \\ \texttt{git commit [...]}
+    \\ Do work; make commits.
   \end{figure}
 \end{frame}
 
@@ -262,8 +262,8 @@ git remote show origin
 \begin{frame}{Pull requests---can push}
   \begin{figure}
     \includegraphics{push_009.pdf}
-    \\ Click ``New Pull Request;'' code review
-    \\ \texttt{git commit [...]}
+    \\ Click ``New Pull Request''
+    \\ Get comments; do work; make commits.
   \end{figure}
 \end{frame}
 
@@ -335,7 +335,7 @@ git remote show origin
 \begin{frame}{Pull requests---can't push}
   \begin{figure}
     \includegraphics{fork_002.pdf}
-    \\ \texttt{git clone [url]}
+    \\ Click ``Fork'' on GitHub
     \\ \texttt{}
   \end{figure}
 \end{frame}
@@ -343,8 +343,8 @@ git remote show origin
 \begin{frame}{Pull requests---can't push}
   \begin{figure}
     \includegraphics{fork_003.pdf}
-    \\ Click ``Fork'' on GitHub
-    \\ \texttt{git remote add my\_fork [url]}
+    \\ \texttt{git clone [my\_url]}
+    \\ \texttt{git remote add upstream [their\_url]}
   \end{figure}
 \end{frame}
 
@@ -352,14 +352,14 @@ git remote show origin
   \begin{figure}
     \includegraphics{fork_004.pdf}
     \\ \texttt{git checkout -b my\_branch}
-    \\ \texttt{git commit [...]}
+    \\ Do work; make commits.
   \end{figure}
 \end{frame}
 
 \begin{frame}{Pull requests---can't push}
   \begin{figure}
     \includegraphics{fork_005.pdf}
-    \\ \texttt{git push my\_fork my\_branch}
+    \\ \texttt{git push origin my\_branch}
     \\ \texttt{}
   \end{figure}
 \end{frame}
@@ -376,14 +376,14 @@ git remote show origin
   \begin{figure}
     \includegraphics{fork_007.pdf}
     \\ \texttt{git checkout master}
-    \\ \texttt{git pull origin master}
+    \\ \texttt{git pull upstream master}
   \end{figure}
 \end{frame}
 
 \begin{frame}{Pull requests---can't push}
   \begin{figure}
     \includegraphics{fork_008.pdf}
-    \\ \texttt{git push my\_fork master}
+    \\ \texttt{git push origin master}
     \\ \texttt{}
   \end{figure}
 \end{frame}
@@ -399,7 +399,7 @@ git remote show origin
 \begin{frame}{Pull requests---can't push}
   \begin{figure}
     \includegraphics{fork_010.pdf}
-    \\ \texttt{git push my\_fork my\_branch}
+    \\ \texttt{git push origin my\_branch}
     \\ \texttt{}
   \end{figure}
 \end{frame}
@@ -407,15 +407,15 @@ git remote show origin
 \begin{frame}{Pull requests---can't push}
   \begin{figure}
     \includegraphics{fork_011.pdf}
-    \\ Click ``New Pull Request;'' code review
-    \\ \texttt{git commit [...]}
+    \\ Click ``New Pull Request''
+    \\ Get comments; do work; make commits.
   \end{figure}
 \end{frame}
 
 \begin{frame}{Pull requests---can't push}
   \begin{figure}
     \includegraphics{fork_012.pdf}
-    \\ \texttt{git push my\_fork my\_branch}
+    \\ \texttt{git push origin my\_branch}
     \\ \texttt{}
   \end{figure}
 \end{frame}
@@ -439,14 +439,14 @@ git remote show origin
   \begin{figure}
     \includegraphics{fork_015.pdf}
     \\ \texttt{git checkout master}
-    \\ \texttt{git pull origin master}
+    \\ \texttt{git pull upstream master}
   \end{figure}
 \end{frame}
 
 \begin{frame}{Pull requests---can't push}
   \begin{figure}
     \includegraphics{fork_016.pdf}
-    \\ \texttt{git push my\_fork master}
+    \\ \texttt{git push origin master}
     \\ \texttt{}
   \end{figure}
 \end{frame}
@@ -462,7 +462,7 @@ git remote show origin
 \begin{frame}{Pull requests---can't push}
   \begin{figure}
     \includegraphics{fork_018.pdf}
-    \\ \texttt{git push my\_fork :my\_branch}
+    \\ \texttt{git push origin :my\_branch}
     \\ Done!
   \end{figure}
 \end{frame}
