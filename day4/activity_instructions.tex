@@ -24,12 +24,12 @@
   \personB{Relax.}
 %
   \personA{Relax.}
-  \personB{Clone their repository on GitHub:
-    \\ \texttt{git clone [their\_repo\_url]}
-    \\ Navigate to their GitHub repo page, and fork their repo
+  \personB{Navigate to their GitHub repo page, and fork their repo
        by clicking ``Fork.''
-    \\ Connect your local clone to your fork:
-    \\ \texttt{git remote add my\_fork [your\_fork\_url]}}
+    \\ Clone your fork from GitHub:
+    \\ \texttt{git clone [your\_fork\_url]}
+    \\ Connect your local clone to the original repo:
+    \\ \texttt{git remote add upstream [their\_repo\_url]}}
 %
   \personA{Working on master
    \\ (\texttt{git checkout master}):
@@ -45,19 +45,19 @@
    \\ Commit the work:
    \\ \texttt{git commit -a -m '\ldots'}
    \\ Push the work to GitHub:
-   \\ \texttt{git push my\_fork my\_branch}}
+   \\ \texttt{git push origin my\_branch}}
 %
   \personA{Relax.}
   \personB{Grab their work:
    \\ \texttt{git checkout master}
-   \\ \texttt{git pull origin master}
+   \\ \texttt{git pull upstream master}
    \\ Add their work to your fork:
-   \\ \texttt{git push my\_fork master}
+   \\ \texttt{git push origin master}
    \\ Merge their work into your branch:
    \\ \texttt{git checkout my\_branch}
    \\ \texttt{git merge master}
    \\ Add your merge to your fork:
-   \\ \texttt{git push my\_fork my\_branch}
+   \\ \texttt{git push origin my\_branch}
    \\ Go to the GitHub page for your fork. Find your branch \texttt{my\_branch}.
       Click on ``New Pull Request.''
    \\ Send them a message on the pull request page---you can tag them with
@@ -81,7 +81,7 @@
    \\ Commit your work:
    \\ \texttt{git commit -a -m '\ldots'}
    \\ Push the work to your fork:
-   \\ \texttt{git push my\_fork my\_branch}}
+   \\ \texttt{git push origin my\_branch}}
 %
   \personA{Now you're happy. Click ``Merge Pull Request'' and confirm.
     Click ``Delete Branch.''}
@@ -91,13 +91,13 @@
    \\ \texttt{git pull origin master}}
   \personB{Get the successfully merged version:
    \\ \texttt{git checkout master}
-   \\ \texttt{git pull origin master}
+   \\ \texttt{git pull upstream master}
    \\ Update your fork:
-   \\ \texttt{git push my\_fork master}
+   \\ \texttt{git push origin master}
    \\ Delete your local branch:
    \\ \texttt{git branch -d my\_branch}
    \\ Delete your branch on your fork:
-   \\ \texttt{git push my\_fork :my\_branch}}
+   \\ \texttt{git push origin :my\_branch}}
 %
 \end{parcolumns}
 \end{document}
